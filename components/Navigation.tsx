@@ -78,7 +78,7 @@ export default function Navigation() {
       )}
       suppressHydrationWarning
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-5xl mx-auto px-6 sm:px-8 lg:px-12">
         <div className="flex justify-between items-center h-16 lg:h-20">
           {/* Logo */}
           <motion.div
@@ -87,8 +87,7 @@ export default function Navigation() {
             className="flex-shrink-0"
           >
             <a href="/" className="block text-2xl font-bold text-white hover:opacity-80 transition-opacity">
-              <span className="text-gradient">LUXE</span>
-              <span className="text-white ml-1">FILMS</span>
+              <span className="text-gradient">LUXE</span><span className="text-white">FILMS</span>
             </a>
           </motion.div>
 

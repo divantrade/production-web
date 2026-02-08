@@ -1,4 +1,4 @@
-import { LuMail, LuPhone, LuMapPin } from 'react-icons/lu';
+import { LuMail, LuPhone, LuMapPin, LuArrowUpRight } from 'react-icons/lu';
 
 const quickLinks = [
   { label: 'Home', href: '/' },
@@ -19,29 +19,62 @@ const services = [
 
 export default function Footer() {
   return (
-    <footer className="bg-black border-t border-white/[0.06]">
-      <div className="max-w-5xl mx-auto px-6 sm:px-8 lg:px-12 py-14">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
-          {/* Brand */}
-          <div>
+    <footer className="relative bg-zinc-950 overflow-hidden">
+      {/* Top accent line */}
+      <div className="h-px bg-gradient-to-r from-transparent via-accent/40 to-transparent" />
+
+      {/* Background glow */}
+      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-accent/[0.03] rounded-full blur-3xl pointer-events-none" />
+
+      {/* Main footer content */}
+      <div className="relative max-w-5xl mx-auto px-6 sm:px-8 lg:px-12 pt-16 pb-8">
+        {/* Top section - Brand + CTA */}
+        <div className="flex flex-col lg:flex-row justify-between items-start gap-10 mb-14">
+          <div className="max-w-sm">
             <a href="/" className="inline-block text-2xl font-bold mb-4">
-              <span className="text-gradient">LUXE</span>
-              <span className="text-white ml-1">FILMS</span>
+              <span className="text-gradient">LUXE</span><span className="text-white">FILMS</span>
             </a>
             <p className="text-zinc-500 text-sm leading-relaxed">
               A documentary production company with years of experience in research, interview production, drama, and full episode delivery across the globe.
             </p>
           </div>
 
+          <div className="flex flex-col items-start lg:items-end gap-3">
+            <a
+              href="mailto:info@luxefilms.com"
+              className="group flex items-center gap-2 text-zinc-400 hover:text-accent transition-colors duration-200"
+            >
+              <span className="text-sm">info@luxefilms.com</span>
+              <LuArrowUpRight className="h-3.5 w-3.5 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+            </a>
+            <a
+              href="tel:+201000000000"
+              className="group flex items-center gap-2 text-zinc-400 hover:text-accent transition-colors duration-200"
+            >
+              <span className="text-sm">+20 100 000 0000</span>
+              <LuArrowUpRight className="h-3.5 w-3.5 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+            </a>
+            <div className="flex items-center gap-2 text-zinc-500">
+              <LuMapPin className="h-3.5 w-3.5 text-accent/60" />
+              <span className="text-sm">Cairo, Egypt</span>
+            </div>
+          </div>
+        </div>
+
+        {/* Divider */}
+        <div className="h-px bg-white/[0.06] mb-10" />
+
+        {/* Links grid */}
+        <div className="grid grid-cols-2 sm:grid-cols-3 gap-10 mb-14">
           {/* Quick Links */}
           <div>
-            <h4 className="text-white font-semibold mb-4">Quick Links</h4>
+            <h4 className="text-xs font-semibold text-accent uppercase tracking-widest mb-5">Navigation</h4>
             <ul className="space-y-3">
               {quickLinks.map((link) => (
                 <li key={link.label}>
                   <a
                     href={link.href}
-                    className="text-zinc-500 hover:text-accent text-sm transition-colors duration-200"
+                    className="text-zinc-500 hover:text-white text-sm transition-colors duration-200"
                   >
                     {link.label}
                   </a>
@@ -52,11 +85,11 @@ export default function Footer() {
 
           {/* Services */}
           <div>
-            <h4 className="text-white font-semibold mb-4">Our Services</h4>
+            <h4 className="text-xs font-semibold text-accent uppercase tracking-widest mb-5">Services</h4>
             <ul className="space-y-3">
               {services.map((service) => (
-                <li key={service} className="text-zinc-500 text-sm">
-                  {service}
+                <li key={service}>
+                  <span className="text-zinc-500 text-sm">{service}</span>
                 </li>
               ))}
             </ul>
@@ -64,22 +97,28 @@ export default function Footer() {
 
           {/* Contact */}
           <div id="contact">
-            <h4 className="text-white font-semibold mb-4">Contact</h4>
-            <ul className="space-y-3">
-              <li className="flex items-start gap-3">
-                <LuMail className="h-4 w-4 text-accent flex-none mt-0.5" />
-                <a href="mailto:info@luxefilms.com" className="text-zinc-500 hover:text-accent text-sm transition-colors">
+            <h4 className="text-xs font-semibold text-accent uppercase tracking-widest mb-5">Get in Touch</h4>
+            <ul className="space-y-4">
+              <li className="flex items-center gap-3">
+                <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-white/[0.04] border border-white/[0.06]">
+                  <LuMail className="h-3.5 w-3.5 text-accent" />
+                </span>
+                <a href="mailto:info@luxefilms.com" className="text-zinc-500 hover:text-white text-sm transition-colors">
                   info@luxefilms.com
                 </a>
               </li>
-              <li className="flex items-start gap-3">
-                <LuPhone className="h-4 w-4 text-accent flex-none mt-0.5" />
-                <a href="tel:+201000000000" className="text-zinc-500 hover:text-accent text-sm transition-colors">
+              <li className="flex items-center gap-3">
+                <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-white/[0.04] border border-white/[0.06]">
+                  <LuPhone className="h-3.5 w-3.5 text-accent" />
+                </span>
+                <a href="tel:+201000000000" className="text-zinc-500 hover:text-white text-sm transition-colors">
                   +20 100 000 0000
                 </a>
               </li>
-              <li className="flex items-start gap-3">
-                <LuMapPin className="h-4 w-4 text-accent flex-none mt-0.5" />
+              <li className="flex items-center gap-3">
+                <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-white/[0.04] border border-white/[0.06]">
+                  <LuMapPin className="h-3.5 w-3.5 text-accent" />
+                </span>
                 <span className="text-zinc-500 text-sm">Cairo, Egypt</span>
               </li>
             </ul>
@@ -87,13 +126,14 @@ export default function Footer() {
         </div>
 
         {/* Bottom bar */}
-        <div className="mt-16 pt-8 border-t border-white/[0.06] flex flex-col sm:flex-row justify-between items-center gap-4">
-          <p className="text-zinc-600 text-sm">
+        <div className="h-px bg-white/[0.06] mb-6" />
+        <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
+          <p className="text-zinc-600 text-xs">
             &copy; {new Date().getFullYear()} Luxe Films. All rights reserved.
           </p>
           <div className="flex items-center gap-6">
-            <a href="#" className="text-zinc-600 hover:text-accent text-sm transition-colors">Privacy Policy</a>
-            <a href="#" className="text-zinc-600 hover:text-accent text-sm transition-colors">Terms of Service</a>
+            <a href="#" className="text-zinc-600 hover:text-zinc-400 text-xs transition-colors">Privacy Policy</a>
+            <a href="#" className="text-zinc-600 hover:text-zinc-400 text-xs transition-colors">Terms of Service</a>
           </div>
         </div>
       </div>
