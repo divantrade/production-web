@@ -4,21 +4,20 @@ import { motion } from 'framer-motion';
 
 export default function CTASection() {
   return (
-    <section className="relative min-h-[70vh] flex flex-col items-center justify-center py-20 lg:py-24 overflow-hidden">
+    <section className="relative py-20 lg:py-24 overflow-hidden">
       {/* Background */}
       <div className="absolute inset-0 bg-gradient-to-br from-zinc-950 via-black to-zinc-950" />
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(212,175,55,0.08)_0%,transparent_60%)]" />
 
       {/* Decorative line */}
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-accent/30 to-transparent" />
 
-      <div className="relative w-full max-w-5xl mx-auto px-6 sm:px-8 lg:px-12">
+      <div className="relative w-full max-w-[1280px] mx-auto px-6 sm:px-8 lg:px-12">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-center"
+          className="rounded-2xl bg-gradient-to-br from-accent/10 via-accent/[0.06] to-transparent border border-accent/20 px-8 py-16 sm:px-12 sm:py-20 lg:px-16 lg:py-24 text-center"
         >
           <p className="text-accent text-sm font-semibold uppercase tracking-widest mb-3">
             Let&apos;s Work Together
