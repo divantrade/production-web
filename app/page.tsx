@@ -1,9 +1,9 @@
 import HeroSection from "@/components/HeroSection";
 import ServicesSection from "@/components/services/ServicesSection";
-import StatsSection from "@/components/StatsSection";
-import WhyChooseUs from "@/components/WhyChooseUs";
-import CTASection from "@/components/CTASection";
-import Footer from "@/components/Footer";
+import StatsSection from "@/components/stats/StatsSection";
+import HowWeWork from "@/components/how-we-work/HowWeWork";
+import CTASection from "@/components/cta/CTASection";
+import Footer from "@/components/footer/Footer";
 
 export default function Home() {
   return (
@@ -11,7 +11,7 @@ export default function Home() {
       <HeroSection />
       <ServicesSection />
       <StatsSection />
-      <WhyChooseUs />
+      <HowWeWork />
       <CTASection />
       <Footer />
     </div>
