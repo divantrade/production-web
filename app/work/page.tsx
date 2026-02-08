@@ -10,6 +10,16 @@ export const metadata = {
 };
 
 async function getWorkPageData() {
+  const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID;
+  if (!projectId || projectId === 'your-project-id' || projectId === 'not-configured') {
+    console.warn('Sanity not configured. Using fallback data for work page.');
+    return {
+      projects: [],
+      categories: [],
+      clients: []
+    };
+  }
+
   try {
     const [projects, categories, clients] = await Promise.all([
       // All projects with full details
