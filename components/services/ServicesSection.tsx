@@ -27,16 +27,16 @@ const SERVICES = [
 
 export default function ServicesSection() {
   return (
-    <section id="services" className="relative pt-32 lg:pt-40 pb-24 lg:pb-32">
+    <section id="services" className="relative min-h-screen flex flex-col items-center justify-center py-10">
       <div className="absolute inset-0 bg-gradient-to-b from-black via-zinc-950 to-zinc-950" />
 
-      <div className="relative max-w-5xl mx-auto px-6 sm:px-8 lg:px-12">
+      <div className="relative w-full max-w-5xl mx-auto px-6 sm:px-8 lg:px-12">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mb-14 lg:mb-16"
+          className="text-center mb-10 lg:mb-12"
         >
           <p className="text-accent text-sm font-semibold uppercase tracking-widest mb-3">
             Our Services
@@ -46,7 +46,7 @@ export default function ServicesSection() {
           </h2>
         </motion.div>
 
-        {/* Services Grid - 3 columns matching Seen Films */}
+        {/* Services Grid - 3 columns */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {SERVICES.map((svc, idx) => {
             const Icon = svc.icon;
