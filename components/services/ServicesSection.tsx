@@ -9,7 +9,7 @@ import {
   LuTv,
   LuPenTool,
   LuGlobe,
-  LuMic2,
+  LuMicVocal,
   LuPalette,
 } from "react-icons/lu";
 
@@ -21,7 +21,7 @@ const SERVICES = [
   { title: "Full Episode\nProduction", icon: LuTv },
   { title: "Script\nDevelopment", icon: LuPenTool },
   { title: "International\nProduction", icon: LuGlobe },
-  { title: "Voice Over", icon: LuMic2 },
+  { title: "Voice Over", icon: LuMicVocal },
   { title: "Graphics", icon: LuPalette },
 ];
 

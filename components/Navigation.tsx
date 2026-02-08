@@ -3,7 +3,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { HiMenu, HiX, HiChevronDown } from 'react-icons/hi';
-import { LuFileSearch, LuMic, LuClapperboard, LuFilm, LuTv, LuPenTool, LuGlobe, LuMic2, LuPalette } from 'react-icons/lu';
+import { LuFileSearch, LuMic, LuClapperboard, LuFilm, LuTv, LuPenTool, LuGlobe, LuMicVocal, LuPalette } from 'react-icons/lu';
 import { cn } from '@/lib/utils';
 
 const serviceItems = [
@@ -14,7 +14,7 @@ const serviceItems = [
   { label: 'Full Episode Production', href: '#services', icon: LuTv },
   { label: 'Script Development', href: '#services', icon: LuPenTool },
   { label: 'International Production', href: '#services', icon: LuGlobe },
-  { label: 'Voice Over', href: '#services', icon: LuMic2 },
+  { label: 'Voice Over', href: '#services', icon: LuMicVocal },
   { label: 'Graphics', href: '#services', icon: LuPalette },
 ];
 
