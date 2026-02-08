@@ -27,27 +27,27 @@ const SERVICES = [
 
 export default function ServicesSection() {
   return (
-    <section id="services" className="relative py-24 lg:py-32">
+    <section id="services" className="relative pt-32 lg:pt-40 pb-24 lg:pb-32">
       <div className="absolute inset-0 bg-gradient-to-b from-black via-zinc-950 to-zinc-950" />
 
-      <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="relative max-w-5xl mx-auto px-6 sm:px-8 lg:px-12">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mb-16 lg:mb-20"
+          className="text-center mb-14 lg:mb-16"
         >
-          <p className="text-accent text-sm font-semibold uppercase tracking-widest mb-4">
+          <p className="text-accent text-sm font-semibold uppercase tracking-widest mb-3">
             Our Services
           </p>
-          <h2 className="text-4xl md:text-5xl font-bold text-white">
+          <h2 className="text-3xl md:text-4xl font-bold text-white">
             What We Produce
           </h2>
         </motion.div>
 
-        {/* Services Grid - 3 columns like Seen Films */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
+        {/* Services Grid - 3 columns matching Seen Films */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {SERVICES.map((svc, idx) => {
             const Icon = svc.icon;
             return (
@@ -59,9 +59,9 @@ export default function ServicesSection() {
                 transition={{ delay: idx * 0.05 }}
                 className="group"
               >
-                <div className="flex flex-col items-center justify-center text-center h-44 sm:h-48 lg:h-52 rounded-2xl border border-white/[0.08] bg-white/[0.02] transition-all duration-300 hover:border-accent/30 hover:bg-accent/[0.04] cursor-pointer">
-                  <Icon className="h-10 w-10 lg:h-12 lg:w-12 text-accent mb-4 transition-transform duration-300 group-hover:scale-110" />
-                  <h3 className="text-sm sm:text-base font-semibold text-zinc-300 group-hover:text-white transition-colors whitespace-pre-line leading-tight">
+                <div className="flex flex-col items-center justify-center text-center h-36 sm:h-40 rounded-xl border border-white/[0.08] bg-white/[0.02] transition-all duration-300 hover:border-accent/30 hover:bg-accent/[0.04] cursor-pointer">
+                  <Icon className="h-9 w-9 lg:h-10 lg:w-10 text-accent mb-3 transition-transform duration-300 group-hover:scale-110" />
+                  <h3 className="text-sm font-semibold text-zinc-300 group-hover:text-white transition-colors whitespace-pre-line leading-tight">
                     {svc.title}
                   </h3>
                 </div>
