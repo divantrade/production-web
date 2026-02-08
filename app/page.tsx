@@ -1,103 +1,210 @@
-import Image from "next/image";
+import { client } from '@/lib/sanity';
+import HeroSection from "@/components/HeroSection";
+import FeaturedProductions from "@/components/featured/FeaturedProductions";
+import ServicesSection from "@/components/services/ServicesSection";
+import StatsSection from "@/components/StatsSection";
+import TestimonialsSection from "@/components/TestimonialsSection";
+import PartnersSection from "@/components/PartnersSection";
 
-export default function Home() {
+// ISR: Revalidate every hour
+export const revalidate = 3600;
+
+async function getHomePageData() {
+  // Check if Sanity is properly configured
+  const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID;
+  if (!projectId || projectId === 'your-project-id') {
+    console.warn('Sanity not configured. Using fallback data.');
+    return {
+      siteSettings: null,
+      featuredProjects: [],
+      services: [],
+      testimonials: [],
+      clients: []
+    };
+  }
+
+  try {
+    const [siteSettings, featuredProjects, services, testimonials, clients] = await Promise.all([
+      // Site settings (singleton)
+      client.fetch(`
+        *[_type == "siteSettings"][0] {
+          siteTitle,
+          siteDescription,
+          heroVideo,
+          heroTitle,
+          heroSubtitle,
+          heroDescription,
+          companyInfo,
+          contactInfo,
+          socialLinks
+        }
+      `),
+      // Featured projects
+      client.fetch(`
+        *[_type == "project" && featured == true] | order(_createdAt desc) [0...6] {
+          _id,
+          title,
+          slug,
+          description,
+          category->{title, slug},
+          featuredImage,
+          videoUrl,
+          tags,
+          featured,
+          completionDate
+        }
+      `),
+      // Featured services
+      client.fetch(`
+        *[_type == "service" && featured == true] | order(order asc) [0...6] {
+          _id,
+          title,
+          description,
+          icon,
+          features,
+          pricing,
+          featured
+        }
+      `),
+      // Featured testimonials
+      client.fetch(`
+        *[_type == "testimonial" && featured == true] | order(_createdAt desc) [0...6] {
+          _id,
+          clientName,
+          company,
+          position,
+          quote,
+          rating,
+          avatar,
+          featured
+        }
+      `),
+      // Featured clients
+      client.fetch(`
+        *[_type == "client" && featured == true] | order(_createdAt desc) [0...12] {
+          _id,
+          name,
+          logo,
+          website,
+          industry,
+          featured
+        }
+      `)
+    ]);
+
+    return {
+      siteSettings,
+      featuredProjects,
+      services,
+      testimonials,
+      clients
+    };
+  } catch (error) {
+    console.error('Error fetching home page data:', error);
+    return {
+      siteSettings: null,
+      featuredProjects: [],
+      services: [],
+      testimonials: [],
+      clients: []
+    };
+  }
+}
+
+export default async function Home() {
+  const data = await getHomePageData();
   return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
-
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+    <div className="min-h-screen">
+      <HeroSection />
+      <section id="work" className="relative py-20 lg:py-28">
+        <div className="max-w-7xl mx-auto px-4">
+          <div className="flex items-center gap-4">
+            <div className="h-px w-12 bg-yellow-500/80" />
+            <h2 className="text-4xl md:text-5xl font-extrabold tracking-tight">Featured Productions</h2>
+          </div>
+          <p className="mt-3 max-w-2xl text-zinc-300">A selection of our latest cinematic work.</p>
+          <div className="mt-10"><FeaturedProductions /></div>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+      </section>
+
+      <section id="services" className="relative py-20 lg:py-28 bg-gradient-to-b from-black via-zinc-950 to-black">
+        <div className="max-w-7xl mx-auto px-4">
+          <div className="flex items-center gap-4">
+            <div className="h-px w-12 bg-yellow-500/80" />
+            <h2 className="text-4xl md:text-5xl font-extrabold tracking-tight">Our Services</h2>
+          </div>
+          <p className="mt-3 max-w-3xl text-zinc-300">From concept to completion, we deliver exceptional visual content.</p>
+          <div className="mt-10"><ServicesSection /></div>
+        </div>
+      </section>
+      <StatsSection />
+      <TestimonialsSection />
+      <PartnersSection />
+      
+      {/* About and Contact sections */}
+      <section id="about" className="min-h-screen bg-background flex items-center justify-center">
+        <div className="text-center max-w-4xl mx-auto px-6">
+          <h2 className="text-4xl md:text-6xl font-bold text-primary mb-8">About Us</h2>
+          {data.siteSettings?.companyInfo ? (
+            <div className="space-y-6">
+              <p className="text-xl text-gray-700 leading-relaxed">
+                {data.siteSettings.companyInfo.description}
+              </p>
+              {data.siteSettings.companyInfo.mission && (
+                <div>
+                  <h3 className="text-2xl font-semibold text-primary mb-3">Our Mission</h3>
+                  <p className="text-lg text-gray-600">
+                    {data.siteSettings.companyInfo.mission}
+                  </p>
+                </div>
+              )}
+              {data.siteSettings.companyInfo.vision && (
+                <div>
+                  <h3 className="text-2xl font-semibold text-primary mb-3">Our Vision</h3>
+                  <p className="text-lg text-gray-600">
+                    {data.siteSettings.companyInfo.vision}
+                  </p>
+                </div>
+              )}
+            </div>
+          ) : (
+            <p className="text-gray-600">About section coming soon...</p>
+          )}
+        </div>
+      </section>
+
+      <section id="contact" className="min-h-screen bg-primary flex items-center justify-center">
+        <div className="text-center max-w-4xl mx-auto px-6">
+          <h2 className="text-4xl md:text-6xl font-bold text-white mb-8">Contact Us</h2>
+          {data.siteSettings?.contactInfo ? (
+            <div className="space-y-6 text-white">
+              {data.siteSettings.contactInfo.email && (
+                <p className="text-xl">
+                  <span className="text-accent">Email:</span> {data.siteSettings.contactInfo.email}
+                </p>
+              )}
+              {data.siteSettings.contactInfo.phone && (
+                <p className="text-xl">
+                  <span className="text-accent">Phone:</span> {data.siteSettings.contactInfo.phone}
+                </p>
+              )}
+              {data.siteSettings.contactInfo.address && (
+                <p className="text-lg">
+                  <span className="text-accent">Address:</span><br />
+                  {data.siteSettings.contactInfo.address}
+                </p>
+              )}
+              {data.siteSettings.contactInfo.officeHours && (
+                <p className="text-lg">
+                  <span className="text-accent">Office Hours:</span> {data.siteSettings.contactInfo.officeHours}
+                </p>
+              )}
+            </div>
+          ) : (
+            <p className="text-gray-300">Contact section coming soon...</p>
+          )}
+        </div>
+      </section>
     </div>
   );
 }
