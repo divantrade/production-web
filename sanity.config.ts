@@ -11,8 +11,8 @@ import { siteSettingsSchema } from './sanity/schemas/siteSettings';
 import { categorySchema } from './sanity/schemas/category';
 import { clientSchema } from './sanity/schemas/client';
 
-const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID!;
-const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET!;
+const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || 'not-configured';
+const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET || 'production';
 
 export default defineConfig({
   name: 'luxe-films-studio',
