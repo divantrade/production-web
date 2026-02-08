@@ -21,11 +21,10 @@ export default function HeroSection() {
     element?.scrollIntoView({ behavior: 'smooth' });
   };
 
-
   return (
     <section id="home" className="relative h-screen flex items-center justify-center overflow-hidden">
-      {/* Video Background - ALWAYS RENDER, NO CONDITIONS */}
-      <video 
+      {/* Video Background */}
+      <video
         className="absolute inset-0 w-full h-full object-cover"
         autoPlay
         loop
@@ -35,7 +34,7 @@ export default function HeroSection() {
       >
         <source src="/videos/hero-video.mp4" type="video/mp4" />
       </video>
-      
+
       {/* Dark overlay */}
       <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/30 to-black/70" />
 
@@ -46,8 +45,8 @@ export default function HeroSection() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1 }}
           className="text-5xl md:text-7xl lg:text-8xl font-bold text-white mb-6 leading-tight"
-          style={{ 
-            textShadow: '0 0 30px rgba(0,0,0,0.8), 0 0 60px rgba(0,0,0,0.6), 2px 2px 4px rgba(0,0,0,0.9)' 
+          style={{
+            textShadow: '0 0 30px rgba(0,0,0,0.8), 0 0 60px rgba(0,0,0,0.6), 2px 2px 4px rgba(0,0,0,0.9)',
           }}
         >
           <Typewriter
@@ -63,8 +62,8 @@ export default function HeroSection() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.5 }}
           className="text-xl md:text-2xl text-gray-100 mb-8 font-light"
-          style={{ 
-            textShadow: '0 0 20px rgba(0,0,0,0.8), 1px 1px 3px rgba(0,0,0,0.9)' 
+          style={{
+            textShadow: '0 0 20px rgba(0,0,0,0.8), 1px 1px 3px rgba(0,0,0,0.9)',
           }}
         >
           Premium Documentary & Commercial Production
@@ -74,7 +73,7 @@ export default function HeroSection() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 1 }}
-          className="space-y-4 sm:space-y-0 sm:space-x-4 sm:flex sm:justify-center"
+          className="flex flex-col sm:flex-row gap-4 justify-center"
         >
           <Button size="lg" variant="primary" onClick={handleViewWork}>
             View Our Work
@@ -87,16 +86,6 @@ export default function HeroSection() {
 
       {/* Scroll Indicator */}
       <ScrollIndicator />
-
-      {/* Video Attribution/Info (Optional) */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 2 }}
-        className="absolute bottom-4 left-4 text-white/60 text-xs z-10"
-      >
-        <p>Featured: Latest Production Reel</p>
-      </motion.div>
     </section>
   );
 }
