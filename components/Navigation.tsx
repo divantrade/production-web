@@ -8,8 +8,8 @@ import { cn } from '@/lib/utils';
 
 const navItems: NavItem[] = [
   { label: 'Home', href: '/' },
-  { label: 'Our Work', href: '/work' },
   { label: 'Services', href: '#services' },
+  { label: 'Our Work', href: '/work' },
   { label: 'About', href: '/about' },
   { label: 'Contact', href: '#contact' },
 ];
@@ -71,14 +71,14 @@ export default function Navigation() {
               href="/"
               className="block text-2xl font-bold text-white hover:opacity-80 transition-opacity"
             >
-              <span className="text-gradient">LUXE</span>
-              <span className="text-white ml-1">FILMS</span>
+              <span className="text-gradient">DIVAN</span>
+              <span className="text-white ml-1">TRADE</span>
             </a>
           </motion.div>
 
           {/* Desktop Navigation */}
           <div className="hidden lg:block">
-            <div className="ml-10 flex items-baseline space-x-8">
+            <div className="ml-10 flex items-baseline gap-8">
               {navItems.map((item, index) => (
                 <motion.a
                   key={item.label}

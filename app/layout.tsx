@@ -21,9 +21,9 @@ const cairo = Cairo({
 });
 
 export const metadata: Metadata = generateMetadata({
-  title: "Luxe Films - Premium Film Production Company",
-  description: "Professional documentary, commercial, and music video production company specializing in luxury visual storytelling and cinematic excellence.",
-  keywords: ["film production", "documentary", "commercial", "music video", "luxury", "cinematic", "video production", "film company", "visual storytelling"],
+  title: "Divan Trade - Documentary Production Company",
+  description: "Specialized documentary production company offering research, script development, interview production, drama, and full episode delivery worldwide.",
+  keywords: ["documentary production", "film production", "interview production", "docudrama", "script development", "research", "episode production", "corporate video"],
   ogType: "website",
 });
 
@@ -35,13 +35,13 @@ export const viewport = {
 async function getOrganizationData() {
   try {
     const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID;
-    if (!projectId || projectId === 'your-project-id') {
+    if (!projectId || projectId === 'your-project-id' || projectId === 'not-configured') {
       return {
-        phone: '+1-555-0123',
-        email: 'info@luxefilms.com',
-        city: 'Los Angeles',
-        state: 'CA',
-        country: 'US',
+        phone: '+20-100-000-0000',
+        email: 'info@divantrade.com',
+        city: 'Cairo',
+        state: '',
+        country: 'EG',
       };
     }
 
@@ -52,19 +52,19 @@ async function getOrganizationData() {
     `);
 
     return {
-      phone: siteSettings?.contactInfo?.phone || '+1-555-0123',
-      email: siteSettings?.contactInfo?.email || 'info@luxefilms.com',
-      city: 'Los Angeles',
-      state: 'CA',
-      country: 'US',
+      phone: siteSettings?.contactInfo?.phone || '+20-100-000-0000',
+      email: siteSettings?.contactInfo?.email || 'info@divantrade.com',
+      city: 'Cairo',
+      state: '',
+      country: 'EG',
     };
   } catch (error) {
     return {
-      phone: '+1-555-0123',
-      email: 'info@luxefilms.com',
-      city: 'Los Angeles',
-      state: 'CA',
-      country: 'US',
+      phone: '+20-100-000-0000',
+      email: 'info@divantrade.com',
+      city: 'Cairo',
+      state: '',
+      country: 'EG',
     };
   }
 }
@@ -84,7 +84,7 @@ export default async function RootLayout({
         {generateJsonLd(organizationSchema)}
         {generateJsonLd(websiteSchema)}
       </head>
-      <body className={`${inter.variable} ${cairo.variable} antialiased`}>
+      <body className={`${inter.variable} ${cairo.variable} antialiased bg-background text-foreground`}>
         <PWAProvider>
           <LoadingAnimation />
           <NetworkStatus />

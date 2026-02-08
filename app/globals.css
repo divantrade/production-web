@@ -2,12 +2,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&family=Cairo:wght@300;400;500;600;700;900&display=swap');
 
 :root {
-  --background: #F5F5F5;
-  --foreground: #0A0A0A;
-  --primary: #0A0A0A;
+  --background: #09090b;
+  --foreground: #FAFAFA;
+  --primary: #09090b;
   --accent: #D4AF37;
   --text-white: #FFFFFF;
-  --text-gray: #6B7280;
+  --text-gray: #a1a1aa;
 }
 
 @theme inline {
