@@ -19,10 +19,10 @@ const fullProductionItems = [
 
 export default function WhyChooseUs() {
   return (
-    <section className="relative py-24 overflow-hidden">
+    <section className="relative py-24 lg:py-32 overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-b from-zinc-950 to-black" />
 
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 24 }}
