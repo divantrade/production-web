@@ -27,10 +27,10 @@ export default function Footer() {
       <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-accent/[0.03] rounded-full blur-3xl pointer-events-none" />
 
       {/* Main footer content */}
-      <div className="relative max-w-5xl mx-auto px-6 sm:px-8 lg:px-12 pt-16 pb-8">
-        {/* Top section - Brand + CTA */}
+      <div className="relative w-full px-6 sm:px-10 lg:px-16 xl:px-20 pt-16 pb-8">
+        {/* Top section - Brand + Contact info */}
         <div className="flex flex-col lg:flex-row justify-between items-start gap-10 mb-14">
-          <div className="max-w-sm">
+          <div className="max-w-md">
             <a href="/" className="inline-block text-2xl font-bold mb-4">
               <span className="text-gradient">LUXE</span><span className="text-white">FILMS</span>
             </a>
@@ -64,8 +64,8 @@ export default function Footer() {
         {/* Divider */}
         <div className="h-px bg-white/[0.06] mb-10" />
 
-        {/* Links grid */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 gap-10 mb-14">
+        {/* Links grid - 4 columns for full width */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-10 mb-14">
           {/* Quick Links */}
           <div>
             <h4 className="text-xs font-semibold text-accent uppercase tracking-widest mb-5">Navigation</h4>
@@ -122,6 +122,21 @@ export default function Footer() {
                 <span className="text-zinc-500 text-sm">Cairo, Egypt</span>
               </li>
             </ul>
+          </div>
+
+          {/* Newsletter / About */}
+          <div>
+            <h4 className="text-xs font-semibold text-accent uppercase tracking-widest mb-5">About Us</h4>
+            <p className="text-zinc-500 text-sm leading-relaxed mb-4">
+              We specialize in documentary filmmaking, from research and script development to full broadcast-ready delivery.
+            </p>
+            <a
+              href="/about"
+              className="inline-flex items-center gap-1.5 text-accent text-sm font-medium hover:text-accent/80 transition-colors"
+            >
+              Learn more
+              <LuArrowUpRight className="h-3.5 w-3.5" />
+            </a>
           </div>
         </div>
 
