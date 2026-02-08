@@ -41,30 +41,33 @@ export default function StatsSection() {
   const isInView = useInView(ref, { once: true, margin: '-80px' });
 
   return (
-    <section ref={ref} className="relative py-24 lg:py-32 overflow-hidden">
+    <section ref={ref} className="relative py-20 lg:py-24 overflow-hidden">
+      {/* Top separator */}
+      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
+
       {/* Background */}
       <div className="absolute inset-0 bg-gradient-to-b from-zinc-950 via-zinc-900 to-zinc-950" />
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(212,175,55,0.06)_0%,transparent_70%)]" />
 
-      <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="relative max-w-5xl mx-auto px-6 sm:px-8 lg:px-12">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mb-16"
+          className="text-center mb-14"
         >
-          <p className="text-accent text-sm font-semibold uppercase tracking-widest mb-4">Our Track Record</p>
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
+          <p className="text-accent text-sm font-semibold uppercase tracking-widest mb-3">Our Track Record</p>
+          <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
             From Trusted Partner to Full Production House
           </h2>
-          <p className="text-zinc-400 text-lg max-w-3xl mx-auto">
+          <p className="text-zinc-400 text-base max-w-2xl mx-auto leading-relaxed">
             Over the years, we have built our expertise through collaborating with leading production companies and networks — delivering research, interviews, drama, and full episodes across the globe.
           </p>
         </motion.div>
 
         {/* Stats Grid */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-10">
           {stats.map((stat, index) => (
             <motion.div
               key={stat.id}
@@ -74,15 +77,18 @@ export default function StatsSection() {
               transition={{ delay: index * 0.1 }}
               className="text-center"
             >
-              <div className="text-5xl md:text-6xl font-bold text-accent mb-3">
+              <div className="text-4xl md:text-5xl font-bold text-accent mb-2">
                 <Counter end={stat.value} suffix={stat.suffix} shouldStart={isInView} />
               </div>
-              <p className="text-zinc-300 font-medium">{stat.label}</p>
-              <div className="w-10 h-px bg-accent/40 mx-auto mt-4" />
+              <p className="text-zinc-400 text-sm font-medium">{stat.label}</p>
+              <div className="w-8 h-px bg-accent/30 mx-auto mt-3" />
             </motion.div>
           ))}
         </div>
       </div>
+
+      {/* Bottom separator */}
+      <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
     </section>
   );
 }

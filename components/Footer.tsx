@@ -13,12 +13,14 @@ const services = [
   'Interview Production',
   'Drama & Docudrama',
   'Full Episode Production',
+  'Voice Over',
+  'Graphics',
 ];
 
 export default function Footer() {
   return (
     <footer className="bg-black border-t border-white/[0.06]">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+      <div className="max-w-5xl mx-auto px-6 sm:px-8 lg:px-12 py-14">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
           {/* Brand */}
           <div>
