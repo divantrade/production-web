@@ -21,7 +21,7 @@ const cairo = Cairo({
 });
 
 export const metadata: Metadata = generateMetadata({
-  title: "Divan Trade - Documentary Production Company",
+  title: "Luxe Films - Documentary Production Company",
   description: "Specialized documentary production company offering research, script development, interview production, drama, and full episode delivery worldwide.",
   keywords: ["documentary production", "film production", "interview production", "docudrama", "script development", "research", "episode production", "corporate video"],
   ogType: "website",
@@ -38,7 +38,7 @@ async function getOrganizationData() {
     if (!projectId || projectId === 'your-project-id' || projectId === 'not-configured') {
       return {
         phone: '+20-100-000-0000',
-        email: 'info@divantrade.com',
+        email: 'info@luxefilms.com',
         city: 'Cairo',
         state: '',
         country: 'EG',
@@ -53,7 +53,7 @@ async function getOrganizationData() {
 
     return {
       phone: siteSettings?.contactInfo?.phone || '+20-100-000-0000',
-      email: siteSettings?.contactInfo?.email || 'info@divantrade.com',
+      email: siteSettings?.contactInfo?.email || 'info@luxefilms.com',
       city: 'Cairo',
       state: '',
       country: 'EG',
@@ -61,7 +61,7 @@ async function getOrganizationData() {
   } catch (error) {
     return {
       phone: '+20-100-000-0000',
-      email: 'info@divantrade.com',
+      email: 'info@luxefilms.com',
       city: 'Cairo',
       state: '',
       country: 'EG',

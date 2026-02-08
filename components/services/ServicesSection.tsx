@@ -36,7 +36,7 @@ export default function ServicesSection() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mb-10 lg:mb-12"
+          className="text-center mb-16 lg:mb-20"
         >
           <p className="text-accent text-sm font-semibold uppercase tracking-widest mb-3">
             Our Services

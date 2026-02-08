@@ -20,11 +20,11 @@ interface SEOData {
 }
 
 const defaultSEO = {
-  siteName: 'Divan Trade',
-  siteUrl: process.env.NEXT_PUBLIC_SITE_URL || 'https://divantrade.com',
-  description: 'Documentary production company offering research, script development, interview production, drama, and full episode delivery worldwide.',
+  siteName: 'Luxe Films',
+  siteUrl: process.env.NEXT_PUBLIC_SITE_URL || 'https://luxefilms.com',
+  description: 'Premium Documentary & Commercial Production - Creating compelling visual narratives that inspire and engage audiences worldwide.',
   ogImage: '/images/og-default.jpg',
-  twitterHandle: '@divantrade',
+  twitterHandle: '@luxefilms',
 };
 
 export function generateMetadata(seoData: SEOData): Metadata {
@@ -119,10 +119,10 @@ export function generateStructuredData(type: string, data: any) {
         url: baseUrl,
         logo: `${baseUrl}/images/logo.png`,
         sameAs: [
-          'https://twitter.com/divantrade',
-          'https://linkedin.com/company/divantrade',
-          'https://instagram.com/divantrade',
-          'https://youtube.com/divantrade',
+          'https://twitter.com/luxefilms',
+          'https://linkedin.com/company/luxefilms',
+          'https://instagram.com/luxefilms',
+          'https://youtube.com/luxefilms',
         ],
         contactPoint: {
           '@type': 'ContactPoint',

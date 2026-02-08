@@ -87,8 +87,8 @@ export default function Navigation() {
             className="flex-shrink-0"
           >
             <a href="/" className="block text-2xl font-bold text-white hover:opacity-80 transition-opacity">
-              <span className="text-gradient">DIVAN</span>
-              <span className="text-white ml-1">TRADE</span>
+              <span className="text-gradient">LUXE</span>
+              <span className="text-white ml-1">FILMS</span>
             </a>
           </motion.div>
 
