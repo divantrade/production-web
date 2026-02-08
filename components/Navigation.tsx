@@ -78,9 +78,9 @@ export default function Navigation() {
       )}
       suppressHydrationWarning
     >
-      <div className="max-w-5xl mx-auto px-6 sm:px-8 lg:px-12">
-        <div className="flex justify-between items-center h-16 lg:h-20">
-          {/* Logo */}
+      <div className="w-full px-6 sm:px-10 lg:px-16 xl:px-20">
+        <div className="flex items-center h-16 lg:h-20">
+          {/* Logo - far left */}
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
@@ -91,8 +91,8 @@ export default function Navigation() {
             </a>
           </motion.div>
 
-          {/* Desktop Navigation */}
-          <div className="hidden lg:flex items-center gap-8">
+          {/* Desktop Navigation - centered */}
+          <div className="hidden lg:flex items-center justify-center gap-8 flex-1">
             <motion.a
               href="/"
               initial={{ opacity: 0, y: -20 }}
@@ -190,8 +190,8 @@ export default function Navigation() {
             ))}
           </div>
 
-          {/* Right side */}
-          <div className="flex items-center gap-4">
+          {/* Right side - far right */}
+          <div className="flex items-center gap-4 ml-auto lg:ml-0 flex-shrink-0">
             <a
               href="#contact"
               onClick={(e) => { e.preventDefault(); handleNavClick('#contact'); }}
