@@ -9,6 +9,8 @@ import {
   LuTv,
   LuPenTool,
   LuGlobe,
+  LuMic2,
+  LuPalette,
 } from "react-icons/lu";
 
 const SERVICES = [
@@ -19,6 +21,8 @@ const SERVICES = [
   { title: "Full Episode\nProduction", icon: LuTv },
   { title: "Script\nDevelopment", icon: LuPenTool },
   { title: "International\nProduction", icon: LuGlobe },
+  { title: "Voice Over", icon: LuMic2 },
+  { title: "Graphics", icon: LuPalette },
 ];
 
 export default function ServicesSection() {
@@ -42,8 +46,8 @@ export default function ServicesSection() {
           </h2>
         </motion.div>
 
-        {/* Services - Flex wrap with centered last row */}
-        <div className="flex flex-wrap justify-center gap-4 sm:gap-5 lg:gap-6">
+        {/* Services Grid - 3 columns like Seen Films */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
           {SERVICES.map((svc, idx) => {
             const Icon = svc.icon;
             return (
@@ -52,12 +56,12 @@ export default function ServicesSection() {
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ delay: idx * 0.07 }}
-                className="group w-[calc(50%-0.5rem)] sm:w-44 lg:w-52"
+                transition={{ delay: idx * 0.05 }}
+                className="group"
               >
-                <div className="aspect-square flex flex-col items-center justify-center text-center rounded-2xl border border-white/[0.08] bg-white/[0.02] transition-all duration-300 hover:border-accent/30 hover:bg-accent/[0.04] cursor-pointer">
+                <div className="flex flex-col items-center justify-center text-center h-44 sm:h-48 lg:h-52 rounded-2xl border border-white/[0.08] bg-white/[0.02] transition-all duration-300 hover:border-accent/30 hover:bg-accent/[0.04] cursor-pointer">
                   <Icon className="h-10 w-10 lg:h-12 lg:w-12 text-accent mb-4 transition-transform duration-300 group-hover:scale-110" />
-                  <h3 className="text-xs sm:text-sm font-semibold text-zinc-300 group-hover:text-white transition-colors whitespace-pre-line leading-tight">
+                  <h3 className="text-sm sm:text-base font-semibold text-zinc-300 group-hover:text-white transition-colors whitespace-pre-line leading-tight">
                     {svc.title}
                   </h3>
                 </div>
