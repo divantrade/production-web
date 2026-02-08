@@ -1,8 +1,8 @@
 "use client";
 
-import { ReactNode } from "react";
 import { motion } from "framer-motion";
-import { LuCamera, LuClapperboard, LuMusic } from "react-icons/lu";
+import { LuFileSearch, LuMic, LuClapperboard, LuFilm } from "react-icons/lu";
+import { ReactNode } from "react";
 
 type Service = {
   id: string;
@@ -14,116 +14,97 @@ type Service = {
 
 const SERVICES: Service[] = [
   {
-    id: "cinematography",
-    title: "Cinematography",
+    id: "research",
+    title: "Research & Script Development",
     description:
-      "High-end camera work and lighting for commercials, films, and branded content.",
+      "In-depth research and scriptwriting that form the backbone of compelling documentary storytelling.",
     points: [
-      "Camera packages & crew",
-      "Lighting design",
-      "On-set monitoring",
-      "Color pipeline",
+      "Documentary research & fact-checking",
+      "Script & treatment writing",
+      "Story development & structure",
+      "Content review & editorial consultation",
     ],
-    icon: (
-      <span className="inline-flex h-12 w-12 items-center justify-center rounded-full bg-white text-black">
-        <LuCamera className="h-6 w-6" aria-hidden />
-      </span>
-    ),
+    icon: <LuFileSearch className="h-6 w-6" aria-hidden />,
   },
   {
-    id: "production",
-    title: "Production",
+    id: "interviews",
+    title: "Interview Production",
     description:
-      "From pre-production to delivery — seamless production management and execution.",
+      "Professional interview production services across multiple countries, managed end-to-end by our experienced field teams.",
     points: [
-      "Scheduling & budgeting",
-      "Location scouting",
-      "Casting & crew",
-      "Permits & logistics",
+      "International interview coordination",
+      "Local crew & equipment sourcing",
+      "Travel & logistics management",
+      "Multi-language production support",
     ],
-    icon: (
-      <span className="inline-flex h-12 w-12 items-center justify-center rounded-full bg-white text-black">
-        <LuClapperboard className="h-6 w-6" aria-hidden />
-      </span>
-    ),
+    icon: <LuMic className="h-6 w-6" aria-hidden />,
   },
   {
-    id: "music",
-    title: "Music & Sound",
+    id: "drama",
+    title: "Drama & Docudrama",
     description:
-      "Original music, licensing, and sound design that elevate the visual narrative.",
+      "Cinematic dramatic sequences and docudrama production that bring documentary narratives to life with powerful visuals.",
     points: [
-      "Original scoring",
-      "Sound design",
-      "Voiceover & ADR",
-      "Mix & master",
+      "Docudrama scene production",
+      "Casting & talent direction",
+      "Set design & art direction",
+      "Cinematic lighting & camera work",
     ],
-    icon: (
-      <span className="inline-flex h-12 w-12 items-center justify-center rounded-full bg-white text-black">
-        <LuMusic className="h-6 w-6" aria-hidden />
-      </span>
-    ),
+    icon: <LuClapperboard className="h-6 w-6" aria-hidden />,
+  },
+  {
+    id: "full-production",
+    title: "Full Episode Production",
+    description:
+      "Complete documentary episode production from concept to final delivery — research, filming, editing, and mastering.",
+    points: [
+      "End-to-end episode production",
+      "Post-production & color grading",
+      "Sound design & mixing",
+      "Delivery to broadcast standards",
+    ],
+    icon: <LuFilm className="h-6 w-6" aria-hidden />,
   },
 ];
 
 export default function ServicesSection() {
   return (
-    <section aria-labelledby="services-heading" className="w-full">
-      <div className="mb-6 flex items-end justify-between">
-        <h2
-          id="services-heading"
-          className="text-base/7 font-semibold tracking-wide text-white/80"
-        >
-          Our Services
-        </h2>
-      </div>
-
-      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+    <section className="w-full">
+      <div className="grid gap-6 md:grid-cols-2">
         {SERVICES.map((svc, idx) => (
           <motion.article
             key={svc.id}
-            className="relative overflow-hidden rounded-2xl bg-zinc-900/60 ring-1 ring-white/10 p-6 transition will-change-transform hover:-translate-y-0.5 hover:ring-white/20"
-            initial={{ opacity: 0, y: 16 }}
+            className="group relative overflow-hidden rounded-2xl border border-white/[0.08] bg-white/[0.03] p-8 transition-all duration-300 hover:border-accent/30 hover:bg-white/[0.05]"
+            initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-10%" }}
-            transition={{ delay: idx * 0.05, duration: 0.4, ease: "easeOut" }}
+            transition={{ delay: idx * 0.1, duration: 0.5, ease: "easeOut" }}
           >
-            {/* Subtle always-present media layer (kept in DOM for SSR/CSR parity) */}
-            <div
-              aria-hidden
-              className="pointer-events-none absolute inset-0 -z-10 opacity-[0.06]"
-            >
-              {/* Soft radial pattern using CSS gradient */}
-              <div className="absolute inset-0 bg-[radial-gradient(60%_60%_at_30%_20%,rgba(255,255,255,0.7)_0%,rgba(255,255,255,0)_70%)]" />
-              <div className="absolute inset-0 bg-[radial-gradient(50%_50%_at_80%_70%,rgba(255,255,255,0.5)_0%,rgba(255,255,255,0)_70%)]" />
-            </div>
+            {/* Accent glow on hover */}
+            <div className="pointer-events-none absolute -top-24 -right-24 h-48 w-48 rounded-full bg-accent/5 opacity-0 blur-3xl transition-opacity duration-500 group-hover:opacity-100" />
 
             {/* Icon */}
-            <div className="mb-4">{svc.icon}</div>
+            <div className="mb-5 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-accent/10 text-accent">
+              {svc.icon}
+            </div>
 
-            {/* Title & description */}
-            <h3 className="text-lg font-semibold text-white">{svc.title}</h3>
-            <p className="mt-1 text-sm text-white/70">
+            {/* Title */}
+            <h3 className="text-xl font-bold text-white mb-2">{svc.title}</h3>
+
+            {/* Description */}
+            <p className="text-sm leading-relaxed text-zinc-400 mb-5">
               {svc.description}
             </p>
 
-            {/* Bullet points */}
-            <ul className="mt-3 space-y-1.5 text-sm text-white/75">
+            {/* Points */}
+            <ul className="space-y-2.5">
               {svc.points.map((pt) => (
-                <li key={pt} className="flex gap-2">
-                  <span className="mt-[6px] inline-block h-1.5 w-1.5 flex-none rounded-full bg-white/60" />
-                  <span className="leading-relaxed">{pt}</span>
+                <li key={pt} className="flex items-start gap-3 text-sm text-zinc-300">
+                  <span className="mt-1.5 h-1.5 w-1.5 flex-none rounded-full bg-accent/60" />
+                  <span>{pt}</span>
                 </li>
               ))}
             </ul>
-
-            {/* CTA */}
-            <button
-              type="button"
-              className="mt-4 inline-flex items-center rounded-full bg-white text-black px-4 py-2 text-sm font-semibold hover:bg-zinc-100 transition"
-            >
-              Learn More →
-            </button>
           </motion.article>
         ))}
       </div>
