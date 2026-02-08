@@ -56,7 +56,7 @@ export default function StatsSection() {
   const isInView = useInView(ref, { once: true, margin: '-80px' });
 
   return (
-    <section ref={ref} className="relative py-24 lg:py-32 overflow-hidden">
+    <section ref={ref} className="relative py-20 lg:py-24 overflow-hidden">
       {/* Top separator */}
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
 
@@ -64,14 +64,14 @@ export default function StatsSection() {
       <div className="absolute inset-0 bg-gradient-to-b from-zinc-950 via-zinc-900 to-zinc-950" />
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(212,175,55,0.06)_0%,transparent_70%)]" />
 
-      <div className="relative w-full max-w-[1200px] mx-auto px-6 sm:px-8 lg:px-20">
+      <div className="relative w-full max-w-[1280px] mx-auto px-6 sm:px-8 lg:px-12">
 
         {/* ── Our Track Record ── */}
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mb-16"
+          className="text-center mb-12"
         >
           <p className="text-accent text-sm font-semibold uppercase tracking-widest mb-3">Our Track Record</p>
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
@@ -83,7 +83,7 @@ export default function StatsSection() {
         </motion.div>
 
         {/* Stats Grid */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8 mb-24">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8 mb-20">
           {stats.map((stat, index) => (
             <motion.div
               key={stat.id}
@@ -108,7 +108,7 @@ export default function StatsSection() {
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mb-14"
+          className="text-center mb-10"
         >
           <p className="text-accent text-sm font-semibold uppercase tracking-widest mb-3">How We Work</p>
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
@@ -120,7 +120,7 @@ export default function StatsSection() {
         </motion.div>
 
         {/* Two Columns */}
-        <div className="grid md:grid-cols-2 gap-5">
+        <div className="grid md:grid-cols-2 gap-6 lg:gap-8">
           {/* Sub-Production */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
@@ -129,7 +129,7 @@ export default function StatsSection() {
             transition={{ duration: 0.6 }}
             className="group"
           >
-            <div className="relative h-full rounded-xl border border-white/[0.08] bg-white/[0.02] p-6 lg:p-8 transition-all duration-300 hover:border-white/[0.15] hover:bg-white/[0.04]">
+            <div className="relative h-full rounded-xl border border-white/[0.08] bg-white/[0.02] p-7 lg:p-9 transition-all duration-300 hover:border-white/[0.15] hover:bg-white/[0.04]">
               <div className="mb-5">
                 <span className="inline-block px-3 py-1 rounded-full bg-zinc-800 text-zinc-300 text-xs font-medium uppercase tracking-wider">
                   Production Services
@@ -160,7 +160,7 @@ export default function StatsSection() {
             transition={{ duration: 0.6 }}
             className="group"
           >
-            <div className="relative h-full rounded-xl border border-accent/20 bg-accent/[0.04] p-6 lg:p-8 transition-all duration-300 hover:border-accent/35 hover:bg-accent/[0.07]">
+            <div className="relative h-full rounded-xl border border-accent/20 bg-accent/[0.04] p-7 lg:p-9 transition-all duration-300 hover:border-accent/35 hover:bg-accent/[0.07]">
               <div className="pointer-events-none absolute -top-20 -right-20 h-40 w-40 rounded-full bg-accent/10 blur-3xl" />
 
               <div className="relative">

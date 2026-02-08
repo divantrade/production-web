@@ -19,10 +19,10 @@ const fullProductionItems = [
 
 export default function HowWeWork() {
   return (
-    <section className="relative min-h-screen flex flex-col items-center justify-center py-20 lg:py-24 overflow-hidden">
+    <section className="relative flex flex-col items-center justify-center py-20 lg:py-24 overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-b from-zinc-950 to-black" />
 
-      <div className="relative w-full max-w-5xl mx-auto px-6 sm:px-8 lg:px-12">
+      <div className="relative w-full max-w-[1280px] mx-auto px-6 sm:px-8 lg:px-12">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 24 }}
@@ -40,10 +40,10 @@ export default function HowWeWork() {
         </motion.div>
 
         {/* Spacer */}
-        <div style={{ height: '60px' }} />
+        <div className="h-10" />
 
         {/* Two Columns */}
-        <div className="grid md:grid-cols-2 gap-5">
+        <div className="grid md:grid-cols-2 gap-6 lg:gap-8">
           {/* Sub-Production */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
@@ -52,7 +52,7 @@ export default function HowWeWork() {
             transition={{ duration: 0.6 }}
             className="group"
           >
-            <div className="relative h-full rounded-xl border border-white/[0.08] bg-white/[0.02] p-6 lg:p-8 transition-all duration-300 hover:border-white/[0.15] hover:bg-white/[0.04]">
+            <div className="relative h-full rounded-xl border border-white/[0.08] bg-white/[0.02] p-7 lg:p-9 transition-all duration-300 hover:border-white/[0.15] hover:bg-white/[0.04]">
               <div className="mb-5">
                 <span className="inline-block px-3 py-1 rounded-full bg-zinc-800 text-zinc-300 text-xs font-medium uppercase tracking-wider">
                   Production Services
@@ -83,7 +83,7 @@ export default function HowWeWork() {
             transition={{ duration: 0.6 }}
             className="group"
           >
-            <div className="relative h-full rounded-xl border border-accent/20 bg-accent/[0.04] p-6 lg:p-8 transition-all duration-300 hover:border-accent/35 hover:bg-accent/[0.07]">
+            <div className="relative h-full rounded-xl border border-accent/20 bg-accent/[0.04] p-7 lg:p-9 transition-all duration-300 hover:border-accent/35 hover:bg-accent/[0.07]">
               <div className="pointer-events-none absolute -top-20 -right-20 h-40 w-40 rounded-full bg-accent/10 blur-3xl" />
 
               <div className="relative">
