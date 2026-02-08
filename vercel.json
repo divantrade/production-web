@@ -30,7 +30,7 @@
       ]
     },
     {
-      "source": "/(.*\\.(js|css|png|jpg|jpeg|gif|ico|svg|webp|woff|woff2|ttf|eot))",
+      "source": "/(.+)\\.(js|css|png|jpg|jpeg|gif|ico|svg|webp|woff|woff2|ttf|eot)",
       "headers": [
         {
           "key": "Cache-Control",
@@ -86,7 +86,9 @@
       "maxDuration": 15
     }
   },
-  "regions": ["iad1"],
+  "regions": [
+    "iad1"
+  ],
   "build": {
     "env": {
       "NEXT_TELEMETRY_DISABLED": "1"
