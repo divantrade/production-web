@@ -36,7 +36,7 @@ export default function ServicesSection() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mb-16 lg:mb-20"
+          className="text-center"
         >
           <p className="text-accent text-sm font-semibold uppercase tracking-widest mb-3">
             Our Services
@@ -45,6 +45,9 @@ export default function ServicesSection() {
             What We Produce
           </h2>
         </motion.div>
+
+        {/* Spacer between heading and grid */}
+        <div style={{ height: '80px' }} />
 
         {/* Services Grid - 3 columns */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
