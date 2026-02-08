@@ -1,6 +1,6 @@
 import { client } from '@/lib/sanity';
 import HeroSection from "@/components/HeroSection";
-import FeaturedProductions from "@/components/featured/FeaturedProductions";
+import FeaturedWorks from "@/components/FeaturedWorks";
 import ServicesSection from "@/components/services/ServicesSection";
 import StatsSection from "@/components/StatsSection";
 import TestimonialsSection from "@/components/TestimonialsSection";
@@ -116,15 +116,8 @@ export default async function Home() {
   return (
     <div className="min-h-screen">
       <HeroSection />
-      <section id="work" className="relative py-20 lg:py-28">
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="flex items-center gap-4">
-            <div className="h-px w-12 bg-yellow-500/80" />
-            <h2 className="text-4xl md:text-5xl font-extrabold tracking-tight">Featured Productions</h2>
-          </div>
-          <p className="mt-3 max-w-2xl text-zinc-300">A selection of our latest cinematic work.</p>
-          <div className="mt-10"><FeaturedProductions /></div>
-        </div>
+      <section id="work">
+        <FeaturedWorks />
       </section>
 
       <section id="services" className="relative py-20 lg:py-28 bg-gradient-to-b from-black via-zinc-950 to-black">
