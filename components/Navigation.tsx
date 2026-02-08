@@ -3,14 +3,17 @@
 import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { HiMenu, HiX, HiChevronDown } from 'react-icons/hi';
-import { LuFileSearch, LuMic, LuClapperboard, LuFilm } from 'react-icons/lu';
+import { LuFileSearch, LuMic, LuClapperboard, LuFilm, LuTv, LuPenTool, LuGlobe } from 'react-icons/lu';
 import { cn } from '@/lib/utils';
 
 const serviceItems = [
-  { label: 'Research & Script Development', href: '#services', icon: LuFileSearch },
-  { label: 'Interview Production', href: '#services', icon: LuMic },
+  { label: 'Documentary', href: '#services', icon: LuFilm },
+  { label: 'Investigations & Research', href: '#services', icon: LuFileSearch },
   { label: 'Drama & Docudrama', href: '#services', icon: LuClapperboard },
-  { label: 'Full Episode Production', href: '#services', icon: LuFilm },
+  { label: 'Interview Production', href: '#services', icon: LuMic },
+  { label: 'Full Episode Production', href: '#services', icon: LuTv },
+  { label: 'Script Development', href: '#services', icon: LuPenTool },
+  { label: 'International Production', href: '#services', icon: LuGlobe },
 ];
 
 const navItems = [
