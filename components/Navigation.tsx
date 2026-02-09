@@ -78,7 +78,7 @@ export default function Navigation() {
       )}
       suppressHydrationWarning
     >
-      <div className="w-full px-8 sm:px-12 lg:px-20 xl:px-28">
+      <div className="w-full px-6 sm:px-10 lg:px-16 xl:px-20">
         <div className="flex items-center h-16 lg:h-20">
           {/* Logo - far left */}
           <motion.div
@@ -92,7 +92,7 @@ export default function Navigation() {
           </motion.div>
 
           {/* Desktop Navigation - centered */}
-          <div className="hidden lg:flex items-center justify-center gap-10 flex-1">
+          <div className="hidden lg:flex items-center justify-center gap-8 flex-1">
             <motion.a
               href="/"
               initial={{ opacity: 0, y: -20 }}
@@ -195,7 +195,7 @@ export default function Navigation() {
             <a
               href="#contact"
               onClick={(e) => { e.preventDefault(); handleNavClick('#contact'); }}
-              className="hidden lg:inline-flex items-center px-6 py-2.5 rounded-full bg-accent text-black text-sm font-semibold hover:bg-accent/90 transition-colors"
+              className="hidden lg:inline-flex items-center px-5 py-2 rounded-full bg-accent text-black text-sm font-semibold hover:bg-accent/90 transition-colors"
             >
               Get a Quote
             </a>

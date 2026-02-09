@@ -30,7 +30,7 @@ export default function ServicesSection() {
     <section id="services" className="relative min-h-screen flex flex-col items-center justify-center py-10">
       <div className="absolute inset-0 bg-gradient-to-b from-black via-zinc-950 to-zinc-950" />
 
-      <div className="relative w-full max-w-[1170px] mx-auto px-6 sm:px-8 lg:px-8">
+      <div className="relative w-full max-w-5xl mx-auto px-6 sm:px-8 lg:px-12">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}

@@ -1,5 +1,12 @@
-import { LuMail, LuPhone, LuMapPin } from 'react-icons/lu';
-import { FaFacebookF, FaInstagram, FaLinkedinIn } from 'react-icons/fa';
+import { LuMail, LuPhone, LuMapPin, LuArrowUpRight } from 'react-icons/lu';
+
+const quickLinks = [
+  { label: 'Home', href: '/' },
+  { label: 'Our Work', href: '/work' },
+  { label: 'Services', href: '#services' },
+  { label: 'About', href: '/about' },
+  { label: 'Contact', href: '#contact' },
+];
 
 const services = [
   'Research & Script Development',
@@ -10,74 +17,64 @@ const services = [
   'Graphics',
 ];
 
-const navigation = [
-  { label: 'Home', href: '/' },
-  { label: 'Our Work', href: '/work' },
-  { label: 'Services', href: '#services' },
-  { label: 'About', href: '/about' },
-  { label: 'Contact', href: '#contact' },
-];
-
-const socialLinks = [
-  { icon: FaFacebookF, href: '#', label: 'Facebook' },
-  { icon: FaInstagram, href: '#', label: 'Instagram' },
-  { icon: FaLinkedinIn, href: '#', label: 'LinkedIn' },
-];
-
 export default function Footer() {
   return (
-    <footer className="bg-zinc-950">
+    <footer className="relative bg-zinc-950 overflow-hidden">
       {/* Top accent line */}
       <div className="h-px bg-gradient-to-r from-transparent via-accent/40 to-transparent" />
 
+      {/* Background glow */}
+      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-accent/[0.03] rounded-full blur-3xl pointer-events-none" />
+
       {/* Main footer content */}
-      <div className="relative w-full px-8 sm:px-12 lg:px-20 xl:px-28 pt-16 pb-8">
+      <div className="relative w-full px-6 sm:px-10 lg:px-16 xl:px-20 pt-16 pb-8">
         {/* Top section - Brand + Contact info */}
         <div className="flex flex-col lg:flex-row justify-between items-start gap-10 mb-14">
           <div className="max-w-md">
             <a href="/" className="inline-block text-2xl font-bold mb-4">
               <span className="text-gradient">LUXE</span><span className="text-white">FILMS</span>
             </a>
-            <p className="text-zinc-400 text-sm leading-relaxed mb-6">
+            <p className="text-zinc-500 text-sm leading-relaxed">
               A documentary production company with years of experience in research, interview production, drama, and full episode delivery across the globe.
             </p>
-            <div className="flex items-center gap-4">
-              {socialLinks.map((social) => (
-                <a
-                  key={social.label}
-                  href={social.href}
-                  aria-label={social.label}
-                  className="text-zinc-500 hover:text-accent transition-colors duration-200"
-                >
-                  <social.icon className="h-5 w-5" />
-                </a>
-              ))}
+          </div>
+
+          <div className="flex flex-col items-start lg:items-end gap-3">
+            <a
+              href="mailto:info@luxefilms.com"
+              className="group flex items-center gap-2 text-zinc-400 hover:text-accent transition-colors duration-200"
+            >
+              <span className="text-sm">info@luxefilms.com</span>
+              <LuArrowUpRight className="h-3.5 w-3.5 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+            </a>
+            <a
+              href="tel:+201000000000"
+              className="group flex items-center gap-2 text-zinc-400 hover:text-accent transition-colors duration-200"
+            >
+              <span className="text-sm">+20 100 000 0000</span>
+              <LuArrowUpRight className="h-3.5 w-3.5 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+            </a>
+            <div className="flex items-center gap-2 text-zinc-500">
+              <LuMapPin className="h-3.5 w-3.5 text-accent/60" />
+              <span className="text-sm">Cairo, Egypt</span>
             </div>
           </div>
+        </div>
 
-          {/* Column 2: Services */}
-          <div>
-            <h4 className="text-base font-semibold text-white mb-6">Services</h4>
-            <ul className="space-y-4">
-              {services.map((service) => (
-                <li key={service}>
-                  <span className="text-zinc-400 text-sm hover:text-white transition-colors duration-200 cursor-default">
-                    {service}
-                  </span>
-                </li>
-              ))}
-            </ul>
-          </div>
+        {/* Divider */}
+        <div className="h-px bg-white/[0.06] mb-10" />
 
-          {/* Column 3: Navigation */}
+        {/* Links grid - 4 columns for full width */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-10 mb-14">
+          {/* Quick Links */}
           <div>
-            <h4 className="text-base font-semibold text-white mb-6">Company</h4>
-            <ul className="space-y-4">
-              {navigation.map((link) => (
+            <h4 className="text-xs font-semibold text-accent uppercase tracking-widest mb-5">Navigation</h4>
+            <ul className="space-y-3">
+              {quickLinks.map((link) => (
                 <li key={link.label}>
                   <a
                     href={link.href}
-                    className="text-zinc-400 text-sm hover:text-white transition-colors duration-200"
+                    className="text-zinc-500 hover:text-white text-sm transition-colors duration-200"
                   >
                     {link.label}
                   </a>
@@ -86,39 +83,72 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Column 4: Contact Info */}
+          {/* Services */}
+          <div>
+            <h4 className="text-xs font-semibold text-accent uppercase tracking-widest mb-5">Services</h4>
+            <ul className="space-y-3">
+              {services.map((service) => (
+                <li key={service}>
+                  <span className="text-zinc-500 text-sm">{service}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Contact */}
           <div id="contact">
-            <h4 className="text-base font-semibold text-white mb-6">Contact Info</h4>
-            <ul className="space-y-5">
+            <h4 className="text-xs font-semibold text-accent uppercase tracking-widest mb-5">Get in Touch</h4>
+            <ul className="space-y-4">
               <li className="flex items-center gap-3">
-                <LuMapPin className="h-4 w-4 text-accent shrink-0" />
-                <span className="text-zinc-400 text-sm">Cairo, Egypt</span>
+                <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-white/[0.04] border border-white/[0.06]">
+                  <LuMail className="h-3.5 w-3.5 text-accent" />
+                </span>
+                <a href="mailto:info@luxefilms.com" className="text-zinc-500 hover:text-white text-sm transition-colors">
+                  info@luxefilms.com
+                </a>
               </li>
               <li className="flex items-center gap-3">
-                <LuPhone className="h-4 w-4 text-accent shrink-0" />
-                <a href="tel:+201000000000" className="text-zinc-400 text-sm hover:text-white transition-colors duration-200">
+                <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-white/[0.04] border border-white/[0.06]">
+                  <LuPhone className="h-3.5 w-3.5 text-accent" />
+                </span>
+                <a href="tel:+201000000000" className="text-zinc-500 hover:text-white text-sm transition-colors">
                   +20 100 000 0000
                 </a>
               </li>
               <li className="flex items-center gap-3">
-                <LuMail className="h-4 w-4 text-accent shrink-0" />
-                <a href="mailto:info@luxefilms.com" className="text-zinc-400 text-sm hover:text-white transition-colors duration-200">
-                  info@luxefilms.com
-                </a>
+                <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-white/[0.04] border border-white/[0.06]">
+                  <LuMapPin className="h-3.5 w-3.5 text-accent" />
+                </span>
+                <span className="text-zinc-500 text-sm">Cairo, Egypt</span>
               </li>
             </ul>
+          </div>
+
+          {/* Newsletter / About */}
+          <div>
+            <h4 className="text-xs font-semibold text-accent uppercase tracking-widest mb-5">About Us</h4>
+            <p className="text-zinc-500 text-sm leading-relaxed mb-4">
+              We specialize in documentary filmmaking, from research and script development to full broadcast-ready delivery.
+            </p>
+            <a
+              href="/about"
+              className="inline-flex items-center gap-1.5 text-accent text-sm font-medium hover:text-accent/80 transition-colors"
+            >
+              Learn more
+              <LuArrowUpRight className="h-3.5 w-3.5" />
+            </a>
           </div>
         </div>
 
         {/* Bottom bar */}
-        <div className="h-px bg-white/[0.06] mt-16 mb-8" />
+        <div className="h-px bg-white/[0.06] mb-6" />
         <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
-          <p className="text-zinc-600 text-sm">
+          <p className="text-zinc-600 text-xs">
             &copy; {new Date().getFullYear()} Luxe Films. All rights reserved.
           </p>
           <div className="flex items-center gap-6">
-            <a href="#" className="text-zinc-600 hover:text-zinc-400 text-sm transition-colors">Privacy Policy</a>
-            <a href="#" className="text-zinc-600 hover:text-zinc-400 text-sm transition-colors">Terms of Service</a>
+            <a href="#" className="text-zinc-600 hover:text-zinc-400 text-xs transition-colors">Privacy Policy</a>
+            <a href="#" className="text-zinc-600 hover:text-zinc-400 text-xs transition-colors">Terms of Service</a>
           </div>
         </div>
       </div>
