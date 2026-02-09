@@ -1,19 +1,23 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import { useTranslations, useLocale } from 'next-intl';
 import Typewriter from './Typewriter';
 import Button from './Button';
 import ScrollIndicator from './ScrollIndicator';
 
 export default function HeroSection() {
+  const t = useTranslations('hero');
+  const locale = useLocale();
+
   const typewriterTexts = [
-    'Crafting Visual Stories',
-    'Creating Cinematic Magic',
-    'Bringing Dreams to Life',
+    t('headlines.0'),
+    t('headlines.1'),
+    t('headlines.2'),
   ];
 
   const handleViewWork = () => {
-    window.location.href = '/work';
+    window.location.href = `/${locale}/work`;
   };
 
   const handleGetInTouch = () => {
@@ -66,7 +70,7 @@ export default function HeroSection() {
             textShadow: '0 0 20px rgba(0,0,0,0.8), 1px 1px 3px rgba(0,0,0,0.9)',
           }}
         >
-          Premium Documentary & Commercial Production
+          {t('subtitle')}
         </motion.p>
 
         <motion.div
@@ -76,10 +80,10 @@ export default function HeroSection() {
           className="flex flex-col sm:flex-row gap-4 justify-center"
         >
           <Button size="lg" variant="primary" onClick={handleViewWork}>
-            View Our Work
+            {t('viewWork')}
           </Button>
           <Button size="lg" variant="secondary" onClick={handleGetInTouch}>
-            Get In Touch
+            {t('getInTouch')}
           </Button>
         </motion.div>
       </div>
