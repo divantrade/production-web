@@ -27,7 +27,7 @@ export default function Footer() {
       <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-accent/[0.03] rounded-full blur-3xl pointer-events-none" />
 
       {/* Main footer content */}
-      <div className="relative w-full px-6 sm:px-10 lg:px-16 xl:px-20 pt-16 pb-8">
+      <div className="relative w-full px-8 sm:px-12 lg:px-20 xl:px-28 pt-16 pb-8">
         {/* Top section - Brand + Contact info */}
         <div className="flex flex-col lg:flex-row justify-between items-start gap-10 mb-14">
           <div className="max-w-md">
