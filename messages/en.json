@@ -1,0 +1,178 @@
+{
+  "navigation": {
+    "home": "Home",
+    "services": "Services",
+    "ourWork": "Our Work",
+    "about": "About",
+    "contact": "Contact",
+    "getQuote": "Get a Quote",
+    "viewAllServices": "View All Services",
+    "serviceItems": {
+      "documentary": "Documentary",
+      "investigationsResearch": "Investigations & Research",
+      "dramaDocudrama": "Drama & Docudrama",
+      "interviewProduction": "Interview Production",
+      "fullEpisodeProduction": "Full Episode Production",
+      "scriptDevelopment": "Script Development",
+      "internationalProduction": "International Production",
+      "voiceOver": "Voice Over",
+      "graphics": "Graphics"
+    }
+  },
+  "hero": {
+    "headlines": ["Crafting Visual Stories", "Creating Cinematic Magic", "Bringing Dreams to Life"],
+    "subtitle": "Premium Documentary & Commercial Production",
+    "viewWork": "VIEW OUR WORK",
+    "getInTouch": "GET IN TOUCH",
+    "scroll": "SCROLL"
+  },
+  "services": {
+    "label": "Our Services",
+    "heading": "What We Produce",
+    "items": {
+      "documentary": "Documentary",
+      "investigationsResearch": "Investigations\n& Research",
+      "dramaDocudrama": "Drama &\nDocudrama",
+      "interviewProduction": "Interview\nProduction",
+      "fullEpisodeProduction": "Full Episode\nProduction",
+      "scriptDevelopment": "Script\nDevelopment",
+      "internationalProduction": "International\nProduction",
+      "voiceOver": "Voice Over",
+      "graphics": "Graphics"
+    }
+  },
+  "stats": {
+    "label": "Our Track Record",
+    "heading": "From Trusted Partner to Full Production House",
+    "description": "Over the years, we have built our expertise through collaborating with leading production companies and networks — delivering research, interviews, drama, and full episodes across the globe.",
+    "episodesProduced": "Episodes Produced",
+    "countriesCovered": "Countries Covered",
+    "clientsNetworks": "Clients & Networks",
+    "yearsExperience": "Years of Experience"
+  },
+  "howWeWork": {
+    "label": "How We Work",
+    "heading": "One Team, Two Ways to Work",
+    "description": "Whether you need support on a single phase or a full production partner — we deliver with the same level of quality and dedication.",
+    "subProduction": {
+      "badge": "Production Services",
+      "heading": "Need help with a specific phase?",
+      "description": "We partner with production companies worldwide, providing specialized support for any stage of documentary production.",
+      "items": [
+        "Research & scriptwriting for existing projects",
+        "Interview production in any country",
+        "Drama scenes for your documentary",
+        "Specific production phases on demand"
+      ]
+    },
+    "fullProduction": {
+      "badge": "Full Production",
+      "heading": "Want us to handle everything?",
+      "description": "From initial concept to broadcast-ready delivery, we produce complete documentaries and series with our experienced in-house team.",
+      "items": [
+        "Complete documentary films from scratch",
+        "Full documentary series & episodes",
+        "End-to-end project management",
+        "Broadcast-ready final delivery"
+      ]
+    }
+  },
+  "cta": {
+    "label": "Let's Work Together",
+    "heading": "Ready to bring your story to life?",
+    "description": "Whether it is a single episode or a full documentary series, our team is ready to deliver exceptional results.",
+    "getInTouch": "Get in Touch",
+    "viewWork": "View Our Work"
+  },
+  "footer": {
+    "brand": {
+      "description": "A documentary production company with years of experience in research, interview production, drama, and full episode delivery across the globe."
+    },
+    "navigation": "Navigation",
+    "servicesHeading": "Services",
+    "getInTouch": "Get in Touch",
+    "aboutUs": "About Us",
+    "aboutDescription": "We specialize in documentary filmmaking, from research and script development to full broadcast-ready delivery.",
+    "learnMore": "Learn more",
+    "copyright": "© {year} Luxe Films. All rights reserved.",
+    "privacyPolicy": "Privacy Policy",
+    "termsOfService": "Terms of Service",
+    "services": {
+      "researchScript": "Research & Script Development",
+      "interviewProduction": "Interview Production",
+      "dramaDocudrama": "Drama & Docudrama",
+      "fullEpisodeProduction": "Full Episode Production",
+      "voiceOver": "Voice Over",
+      "graphics": "Graphics"
+    }
+  },
+  "about": {
+    "breadcrumbHome": "Home",
+    "breadcrumbAbout": "About Us",
+    "heroHeading": "About Luxe Films",
+    "heroTagline": "Crafting Visual Stories That Inspire",
+    "heroDescription": "We are a premium documentary and commercial production company dedicated to creating compelling visual narratives that captivate audiences and drive meaningful engagement.",
+    "watchStory": "Watch Our Story",
+    "storyHeading": "Our Story",
+    "journeyHeading": "Our Journey",
+    "timeline": {
+      "beginning": { "title": "The Beginning", "description": "Luxe Films was founded with a vision to create exceptional visual content." },
+      "firstProject": { "title": "First Major Project", "description": "Completed our first award-winning documentary series." },
+      "expansion": { "title": "Team Expansion", "description": "Grew our team to include specialized departments for different production needs." },
+      "recognition": { "title": "International Recognition", "description": "Received international acclaim and expanded to serve global clients." },
+      "present": { "title": "Present Day", "description": "Leading the industry with innovative productions and cutting-edge technology." }
+    },
+    "missionVision": {
+      "sectionHeading": "Our Foundation",
+      "sectionDescription": "The core principles that guide everything we do",
+      "mission": "Our Mission",
+      "vision": "Our Vision",
+      "approach": "Our Approach",
+      "approachText": "We believe in collaborative storytelling, combining technical expertise with creative vision to deliver content that resonates with audiences and drives meaningful engagement.",
+      "passion": "Our Passion",
+      "passionText": "Every project is an opportunity to push creative boundaries and explore new ways of visual communication, ensuring each story is told with authenticity and impact.",
+      "quote": "Great stories have the power to change perspectives, inspire action, and create lasting connections between people and ideas.",
+      "quoteAuthor": "Luxe Films Team"
+    },
+    "team": {
+      "heading": "Meet Our Team",
+      "description": "Talented professionals passionate about creating exceptional visual content",
+      "ctaHeading": "Join Our Creative Team",
+      "ctaDescription": "We're always looking for talented individuals who share our passion for visual storytelling.",
+      "viewPositions": "View Open Positions"
+    },
+    "awards": {
+      "heading": "Awards & Recognition",
+      "description": "Our commitment to excellence has been recognized by industry leaders and prestigious organizations",
+      "awardsWon": "Awards Won",
+      "filmFestivals": "Film Festivals",
+      "industryRecognition": "Industry Recognition",
+      "yearsRunning": "Years Running"
+    },
+    "values": {
+      "heading": "Our Values",
+      "description": "The principles that drive our creative process and client relationships",
+      "excellenceHeading": "Excellence Through Values",
+      "excellenceDescription": "These values aren't just words on our website – they're the foundation of every project we undertake and every relationship we build."
+    }
+  },
+  "work": {
+    "heroHeading": "Our Portfolio",
+    "heroSubtitle": "Crafting Visual Excellence Since 2014",
+    "heroDescription": "Every project we undertake is a testament to our commitment to storytelling excellence. From intimate documentaries to grand commercial productions, we bring passion, creativity, and technical mastery to every frame.",
+    "projects": "Projects",
+    "awards": "Awards",
+    "clients": "Clients",
+    "exploreWork": "Explore Work",
+    "searchPlaceholder": "Search projects...",
+    "noProjects": "No projects found",
+    "noProjectsDescription": "Try adjusting your filters or search terms to find what you're looking for.",
+    "errorTitle": "Something went wrong",
+    "reloadPage": "Reload Page",
+    "loadMore": "Load More Projects",
+    "loading": "Loading...",
+    "showingOf": "Showing {shown} of {total} projects",
+    "endMessage": "You've reached the end of our portfolio. Want to see more? Get in touch to discuss your next project.",
+    "getInTouch": "Get in touch"
+  }
+}

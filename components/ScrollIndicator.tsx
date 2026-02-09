@@ -2,8 +2,11 @@
 
 import { motion } from 'framer-motion';
 import { HiChevronDown } from 'react-icons/hi';
+import { useTranslations } from 'next-intl';
 
 export default function ScrollIndicator() {
+  const t = useTranslations('hero');
+
   const handleScrollDown = () => {
     window.scrollTo({
       top: window.innerHeight,
@@ -21,7 +24,7 @@ export default function ScrollIndicator() {
     >
       <div className="flex flex-col items-center space-y-2">
         <span className="text-white text-sm font-light tracking-widest uppercase">
-          Scroll
+          {t('scroll')}
         </span>
         <motion.div
           animate={{ y: [0, 10, 0] }}

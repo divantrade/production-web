@@ -22,7 +22,6 @@ async function getWorkPageData() {
 
   try {
     const [projects, categories, clients] = await Promise.all([
-      // All projects with full details
       client.fetch(`
         *[_type == "project"] | order(_createdAt desc) {
           _id,
@@ -70,7 +69,6 @@ async function getWorkPageData() {
           }
         }
       `),
-      // Categories for filtering
       client.fetch(`
         *[_type == "category"] | order(order asc) {
           _id,
@@ -80,7 +78,6 @@ async function getWorkPageData() {
           icon
         }
       `),
-      // Clients for filtering
       client.fetch(`
         *[_type == "client"] | order(name asc) {
           _id,
@@ -110,7 +107,7 @@ export default async function WorkPage() {
   const data = await getWorkPageData();
 
   return (
-    <WorkPageClient 
+    <WorkPageClient
       initialProjects={data.projects}
       categories={data.categories}
       clients={data.clients}

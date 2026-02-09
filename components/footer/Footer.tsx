@@ -1,23 +1,23 @@
+'use client';
+
 import { LuMail, LuPhone, LuMapPin, LuArrowUpRight } from 'react-icons/lu';
+import { useTranslations, useLocale } from 'next-intl';
 
-const quickLinks = [
-  { label: 'Home', href: '/' },
-  { label: 'Our Work', href: '/work' },
-  { label: 'Services', href: '#services' },
-  { label: 'About', href: '/about' },
-  { label: 'Contact', href: '#contact' },
-];
-
-const services = [
-  'Research & Script Development',
-  'Interview Production',
-  'Drama & Docudrama',
-  'Full Episode Production',
-  'Voice Over',
-  'Graphics',
-];
+const serviceKeys = ['researchScript', 'interviewProduction', 'dramaDocudrama', 'fullEpisodeProduction', 'voiceOver', 'graphics'] as const;
 
 export default function Footer() {
+  const t = useTranslations('footer');
+  const tNav = useTranslations('navigation');
+  const locale = useLocale();
+
+  const quickLinks = [
+    { label: tNav('home'), href: `/${locale}` },
+    { label: tNav('ourWork'), href: `/${locale}/work` },
+    { label: tNav('services'), href: '#services' },
+    { label: tNav('about'), href: `/${locale}/about` },
+    { label: tNav('contact'), href: '#contact' },
+  ];
+
   return (
     <footer className="relative bg-zinc-950 overflow-hidden">
       {/* Top accent line */}
@@ -31,11 +31,11 @@ export default function Footer() {
         {/* Top section - Brand + Contact info */}
         <div className="flex flex-col lg:flex-row justify-between items-start gap-10 mb-14">
           <div className="max-w-md">
-            <a href="/" className="inline-block text-2xl font-bold mb-4">
+            <a href={`/${locale}`} className="inline-block text-2xl font-bold mb-4">
               <span className="text-gradient">LUXE</span><span className="text-white">FILMS</span>
             </a>
             <p className="text-zinc-500 text-sm leading-relaxed">
-              A documentary production company with years of experience in research, interview production, drama, and full episode delivery across the globe.
+              {t('brand.description')}
             </p>
           </div>
 
@@ -68,7 +68,7 @@ export default function Footer() {
         <div className="grid grid-cols-2 md:grid-cols-4 gap-10 mb-14">
           {/* Quick Links */}
           <div>
-            <h4 className="text-xs font-semibold text-accent uppercase tracking-widest mb-5">Navigation</h4>
+            <h4 className="text-xs font-semibold text-accent uppercase tracking-widest mb-5">{t('navigation')}</h4>
             <ul className="space-y-3">
               {quickLinks.map((link) => (
                 <li key={link.label}>
@@ -85,11 +85,11 @@ export default function Footer() {
 
           {/* Services */}
           <div>
-            <h4 className="text-xs font-semibold text-accent uppercase tracking-widest mb-5">Services</h4>
+            <h4 className="text-xs font-semibold text-accent uppercase tracking-widest mb-5">{t('servicesHeading')}</h4>
             <ul className="space-y-3">
-              {services.map((service) => (
-                <li key={service}>
-                  <span className="text-zinc-500 text-sm">{service}</span>
+              {serviceKeys.map((key) => (
+                <li key={key}>
+                  <span className="text-zinc-500 text-sm">{t(`services.${key}`)}</span>
                 </li>
               ))}
             </ul>
@@ -97,7 +97,7 @@ export default function Footer() {
 
           {/* Contact */}
           <div id="contact">
-            <h4 className="text-xs font-semibold text-accent uppercase tracking-widest mb-5">Get in Touch</h4>
+            <h4 className="text-xs font-semibold text-accent uppercase tracking-widest mb-5">{t('getInTouch')}</h4>
             <ul className="space-y-4">
               <li className="flex items-center gap-3">
                 <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-white/[0.04] border border-white/[0.06]">
@@ -124,17 +124,17 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Newsletter / About */}
+          {/* About */}
           <div>
-            <h4 className="text-xs font-semibold text-accent uppercase tracking-widest mb-5">About Us</h4>
+            <h4 className="text-xs font-semibold text-accent uppercase tracking-widest mb-5">{t('aboutUs')}</h4>
             <p className="text-zinc-500 text-sm leading-relaxed mb-4">
-              We specialize in documentary filmmaking, from research and script development to full broadcast-ready delivery.
+              {t('aboutDescription')}
             </p>
             <a
-              href="/about"
+              href={`/${locale}/about`}
               className="inline-flex items-center gap-1.5 text-accent text-sm font-medium hover:text-accent/80 transition-colors"
             >
-              Learn more
+              {t('learnMore')}
               <LuArrowUpRight className="h-3.5 w-3.5" />
             </a>
           </div>
@@ -144,11 +144,11 @@ export default function Footer() {
         <div className="h-px bg-white/[0.06] mb-6" />
         <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
           <p className="text-zinc-600 text-xs">
-            &copy; {new Date().getFullYear()} Luxe Films. All rights reserved.
+            {t('copyright', { year: new Date().getFullYear() })}
           </p>
           <div className="flex items-center gap-6">
-            <a href="#" className="text-zinc-600 hover:text-zinc-400 text-xs transition-colors">Privacy Policy</a>
-            <a href="#" className="text-zinc-600 hover:text-zinc-400 text-xs transition-colors">Terms of Service</a>
+            <a href="#" className="text-zinc-600 hover:text-zinc-400 text-xs transition-colors">{t('privacyPolicy')}</a>
+            <a href="#" className="text-zinc-600 hover:text-zinc-400 text-xs transition-colors">{t('termsOfService')}</a>
           </div>
         </div>
       </div>

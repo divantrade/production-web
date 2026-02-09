@@ -1,8 +1,12 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import { useTranslations, useLocale } from 'next-intl';
 
 export default function CTASection() {
+  const t = useTranslations('cta');
+  const locale = useLocale();
+
   return (
     <section className="relative min-h-[70vh] flex flex-col items-center justify-center py-20 lg:py-24 overflow-hidden">
       {/* Background */}
@@ -21,26 +25,26 @@ export default function CTASection() {
           className="text-center"
         >
           <p className="text-accent text-sm font-semibold uppercase tracking-widest mb-3">
-            Let&apos;s Work Together
+            {t('label')}
           </p>
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
-            Ready to bring your story to life?
+            {t('heading')}
           </h2>
           <p className="text-zinc-400 text-base max-w-xl mx-auto mb-10 leading-relaxed">
-            Whether it is a single episode or a full documentary series, our team is ready to deliver exceptional results.
+            {t('description')}
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a
               href="#contact"
               className="inline-flex items-center justify-center px-8 py-3.5 rounded-full bg-accent text-black font-semibold text-sm hover:bg-accent/90 transition-all duration-300 hover:scale-105"
             >
-              Get in Touch
+              {t('getInTouch')}
             </a>
             <a
-              href="/work"
+              href={`/${locale}/work`}
               className="inline-flex items-center justify-center px-8 py-3.5 rounded-full border border-white/20 text-white font-semibold text-sm hover:border-white/40 hover:bg-white/5 transition-all duration-300 hover:scale-105"
             >
-              View Our Work
+              {t('viewWork')}
             </a>
           </div>
         </motion.div>

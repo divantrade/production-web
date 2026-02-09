@@ -2,22 +2,25 @@
 
 import { motion } from 'framer-motion';
 import { LuArrowRight } from 'react-icons/lu';
-
-const subProductionItems = [
-  'Research & scriptwriting for existing projects',
-  'Interview production in any country',
-  'Drama scenes for your documentary',
-  'Specific production phases on demand',
-];
-
-const fullProductionItems = [
-  'Complete documentary films from scratch',
-  'Full documentary series & episodes',
-  'End-to-end project management',
-  'Broadcast-ready final delivery',
-];
+import { useTranslations } from 'next-intl';
 
 export default function HowWeWork() {
+  const t = useTranslations('howWeWork');
+
+  const subProductionItems = [
+    t('subProduction.items.0'),
+    t('subProduction.items.1'),
+    t('subProduction.items.2'),
+    t('subProduction.items.3'),
+  ];
+
+  const fullProductionItems = [
+    t('fullProduction.items.0'),
+    t('fullProduction.items.1'),
+    t('fullProduction.items.2'),
+    t('fullProduction.items.3'),
+  ];
+
   return (
     <section className="relative min-h-screen flex flex-col items-center justify-center py-20 lg:py-24 overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-b from-zinc-950 to-black" />
@@ -30,12 +33,12 @@ export default function HowWeWork() {
           viewport={{ once: true }}
           className="text-center"
         >
-          <p className="text-accent text-sm font-semibold uppercase tracking-widest mb-3">How We Work</p>
+          <p className="text-accent text-sm font-semibold uppercase tracking-widest mb-3">{t('label')}</p>
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
-            One Team, Two Ways to Work
+            {t('heading')}
           </h2>
           <p className="text-zinc-400 text-base max-w-2xl mx-auto leading-relaxed">
-            Whether you need support on a single phase or a full production partner — we deliver with the same level of quality and dedication.
+            {t('description')}
           </p>
         </motion.div>
 
@@ -55,19 +58,19 @@ export default function HowWeWork() {
             <div className="relative h-full rounded-xl border border-white/[0.08] bg-white/[0.02] p-6 lg:p-8 transition-all duration-300 hover:border-white/[0.15] hover:bg-white/[0.04]">
               <div className="mb-5">
                 <span className="inline-block px-3 py-1 rounded-full bg-zinc-800 text-zinc-300 text-xs font-medium uppercase tracking-wider">
-                  Production Services
+                  {t('subProduction.badge')}
                 </span>
               </div>
               <h3 className="text-xl font-bold text-white mb-2">
-                Need help with a specific phase?
+                {t('subProduction.heading')}
               </h3>
               <p className="text-zinc-400 text-sm mb-6 leading-relaxed">
-                We partner with production companies worldwide, providing specialized support for any stage of documentary production.
+                {t('subProduction.description')}
               </p>
               <ul className="space-y-3">
-                {subProductionItems.map((item) => (
-                  <li key={item} className="flex items-start gap-3">
-                    <LuArrowRight className="h-4 w-4 text-accent flex-none mt-0.5" />
+                {subProductionItems.map((item, i) => (
+                  <li key={i} className="flex items-start gap-3">
+                    <LuArrowRight className="h-4 w-4 text-accent flex-none mt-0.5 rtl:rotate-180" />
                     <span className="text-zinc-300 text-sm">{item}</span>
                   </li>
                 ))}
@@ -89,19 +92,19 @@ export default function HowWeWork() {
               <div className="relative">
                 <div className="mb-5">
                   <span className="inline-block px-3 py-1 rounded-full bg-accent/15 text-accent text-xs font-medium uppercase tracking-wider">
-                    Full Production
+                    {t('fullProduction.badge')}
                   </span>
                 </div>
                 <h3 className="text-xl font-bold text-white mb-2">
-                  Want us to handle everything?
+                  {t('fullProduction.heading')}
                 </h3>
                 <p className="text-zinc-400 text-sm mb-6 leading-relaxed">
-                  From initial concept to broadcast-ready delivery, we produce complete documentaries and series with our experienced in-house team.
+                  {t('fullProduction.description')}
                 </p>
                 <ul className="space-y-3">
-                  {fullProductionItems.map((item) => (
-                    <li key={item} className="flex items-start gap-3">
-                      <LuArrowRight className="h-4 w-4 text-accent flex-none mt-0.5" />
+                  {fullProductionItems.map((item, i) => (
+                    <li key={i} className="flex items-start gap-3">
+                      <LuArrowRight className="h-4 w-4 text-accent flex-none mt-0.5 rtl:rotate-180" />
                       <span className="text-zinc-300 text-sm">{item}</span>
                     </li>
                   ))}

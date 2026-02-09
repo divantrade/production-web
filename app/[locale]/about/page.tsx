@@ -21,7 +21,6 @@ export const metadata = genMeta({
 });
 
 async function getAboutPageData() {
-  // Check if Sanity is properly configured
   const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID;
   if (!projectId || projectId === 'your-project-id') {
     console.warn('Sanity not configured. Using fallback data.');
@@ -35,7 +34,6 @@ async function getAboutPageData() {
 
   try {
     const [siteSettings, teamMembers] = await Promise.all([
-      // Site settings with company info
       client.fetch(`
         *[_type == "siteSettings"][0] {
           companyInfo,
@@ -44,7 +42,6 @@ async function getAboutPageData() {
           siteDescription
         }
       `),
-      // Team members
       client.fetch(`
         *[_type == "teamMember"] | order(order asc) {
           _id,
@@ -65,7 +62,6 @@ async function getAboutPageData() {
       `)
     ]);
 
-    // Mock data for awards and values until we have schemas
     const awards = [
       {
         title: "Best Documentary Feature",
