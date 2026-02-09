@@ -31,14 +31,12 @@ export default function Footer() {
       <div className="h-px bg-gradient-to-r from-transparent via-accent/40 to-transparent" />
 
       {/* Main footer content */}
-      <div className="max-w-[1170px] mx-auto px-6 sm:px-8 lg:px-8 pt-20 pb-12">
-        {/* 4-column grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr_1.2fr] gap-10 lg:gap-12">
-          {/* Column 1: Brand + Description + Social */}
-          <div>
-            <a href="/" className="inline-block text-2xl font-bold mb-6">
-              <span className="text-gradient">LUXE</span>
-              <span className="text-white">FILMS</span>
+      <div className="relative w-full px-8 sm:px-12 lg:px-20 xl:px-28 pt-16 pb-8">
+        {/* Top section - Brand + Contact info */}
+        <div className="flex flex-col lg:flex-row justify-between items-start gap-10 mb-14">
+          <div className="max-w-md">
+            <a href="/" className="inline-block text-2xl font-bold mb-4">
+              <span className="text-gradient">LUXE</span><span className="text-white">FILMS</span>
             </a>
             <p className="text-zinc-400 text-sm leading-relaxed mb-6">
               A documentary production company with years of experience in research, interview production, drama, and full episode delivery across the globe.
