@@ -13,7 +13,7 @@ export function middleware(request: NextRequest) {
     pathname.startsWith('/api/') ||
     pathname.startsWith('/studio') ||
     pathname.startsWith('/_next') ||
-    pathname.match(/\.(js|css|png|jpg|jpeg|gif|ico|svg|webp|woff|woff2|ttf|eot|json)$/)
+    pathname.match(/\.(js|css|png|jpg|jpeg|gif|ico|svg|webp|woff|woff2|ttf|eot|json|mp4|webm|ogg|mp3|wav|pdf)$/)
   ) {
     const response = NextResponse.next();
     applySecurityHeaders(response, request);
@@ -52,6 +52,6 @@ function applySecurityHeaders(response: NextResponse, request: NextRequest) {
 
 export const config = {
   matcher: [
-    '/((?!_next/static|_next/image|favicon.ico|sw.js|sitemap.xml|robots.txt|icons|manifest).*)',
+    '/((?!_next/static|_next/image|favicon.ico|sw.js|sitemap.xml|robots.txt|icons|manifest|videos|images).*)',
   ],
 };
