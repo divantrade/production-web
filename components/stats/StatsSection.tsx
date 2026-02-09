@@ -64,7 +64,7 @@ export default function StatsSection() {
       <div className="absolute inset-0 bg-gradient-to-b from-zinc-950 via-zinc-900 to-zinc-950" />
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(212,175,55,0.06)_0%,transparent_70%)]" />
 
-      <div className="relative w-full max-w-[1280px] mx-auto px-6 sm:px-8 lg:px-12">
+      <div className="relative w-full max-w-[1170px] mx-auto px-6 sm:px-8 lg:px-8">
 
         {/* ── Our Track Record ── */}
         <motion.div
