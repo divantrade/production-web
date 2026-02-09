@@ -11,7 +11,7 @@ export default function CTASection() {
       {/* Decorative line */}
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-accent/30 to-transparent" />
 
-      <div className="relative w-full max-w-[1280px] mx-auto px-6 sm:px-8 lg:px-12">
+      <div className="relative w-full max-w-[1170px] mx-auto px-6 sm:px-8 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}

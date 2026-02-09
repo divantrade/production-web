@@ -31,7 +31,7 @@ export default function Footer() {
       <div className="h-px bg-gradient-to-r from-transparent via-accent/40 to-transparent" />
 
       {/* Main footer content */}
-      <div className="max-w-[1280px] mx-auto px-6 sm:px-8 lg:px-12 pt-20 pb-12">
+      <div className="max-w-[1170px] mx-auto px-6 sm:px-8 lg:px-8 pt-20 pb-12">
         {/* 4-column grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr_1.2fr] gap-10 lg:gap-12">
           {/* Column 1: Brand + Description + Social */}

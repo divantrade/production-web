@@ -22,7 +22,7 @@ export default function HowWeWork() {
     <section className="relative flex flex-col items-center justify-center py-20 lg:py-24 overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-b from-zinc-950 to-black" />
 
-      <div className="relative w-full max-w-[1280px] mx-auto px-6 sm:px-8 lg:px-12">
+      <div className="relative w-full max-w-[1170px] mx-auto px-6 sm:px-8 lg:px-8">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 24 }}
