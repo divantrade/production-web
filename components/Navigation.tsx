@@ -78,7 +78,7 @@ export default function Navigation() {
       )}
       suppressHydrationWarning
     >
-      <div className="w-full px-8 sm:px-12 lg:px-20 xl:px-28">
+      <div className="max-w-[1300px] mx-auto px-6 sm:px-8 lg:px-10">
         <div className="flex items-center h-16 lg:h-20">
           {/* Logo - far left */}
           <motion.div
