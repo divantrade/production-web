@@ -59,7 +59,11 @@ jobs:
         node-version: 22.x
         cache: 'npm'
 
-    - name: Run security audit
-      # Report-only until the Next.js upgrade lands (see PR #2); remove once npm audit is clean
+    # Block on critical. Remaining high advisories need major upgrades
+    # (Next.js 16, Sanity 6 CLI) and are tracked separately.
+    - name: Run security audit (blocking on critical)
+      run: npm audit --omit=dev --audit-level critical
+
+    - name: Report high-severity advisories
       continue-on-error: true
       run: npm audit --omit=dev --audit-level high
