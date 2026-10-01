@@ -1,4 +1,5 @@
 import { LuMail, LuPhone, LuMapPin } from 'react-icons/lu';
+import { Link } from '@/i18n/navigation';
 
 const quickLinks = [
   { label: 'Home', href: '/' },
@@ -24,10 +25,10 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
           {/* Brand */}
           <div>
-            <a href="/" className="inline-block text-2xl font-bold mb-4">
+            <Link href="/" className="inline-block text-2xl font-bold mb-4">
               <span className="text-gradient">LUXE</span>
               <span className="text-white ml-1">FILMS</span>
-            </a>
+            </Link>
             <p className="text-zinc-500 text-sm leading-relaxed">
               A documentary production company with years of experience in research, interview production, drama, and full episode delivery across the globe.
             </p>

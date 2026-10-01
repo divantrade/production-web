@@ -113,7 +113,7 @@ export default function CompanyValues({ values }: CompanyValuesProps) {
               Excellence Through Values
             </h3>
             <p className="text-xl text-gray-200 max-w-3xl mx-auto leading-relaxed">
-              These values aren't just words on our website – they're the foundation of every project we undertake and every relationship we build.
+              These values aren&apos;t just words on our website – they&apos;re the foundation of every project we undertake and every relationship we build.
             </p>
           </div>
         </motion.div>

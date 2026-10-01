@@ -252,7 +252,7 @@ export function NetworkStatus() {
           className="fixed top-0 left-0 right-0 bg-red-500 text-white text-center py-2 px-4 z-50"
         >
           <p className="text-sm font-medium">
-            You're offline. Some features may not be available.
+            You&apos;re offline. Some features may not be available.
           </p>
         </motion.div>
       )}
@@ -264,7 +264,7 @@ export function NetworkStatus() {
           className="fixed top-0 left-0 right-0 bg-green-500 text-white text-center py-2 px-4 z-50"
         >
           <p className="text-sm font-medium">
-            You're back online!
+            You&apos;re back online!
           </p>
         </motion.div>
       )}

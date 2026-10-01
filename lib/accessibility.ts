@@ -1,5 +1,7 @@
 // Accessibility utilities and enhancements
 
+import { useState, useEffect } from 'react';
+
 export const a11y = {
   // ARIA labels for common elements
   labels: {
@@ -101,7 +103,6 @@ export const a11y = {
   // Generate accessible carousel attributes
   carousel: (totalItems: number, currentItem: number) => ({
     role: 'region',
-    'aria-label': 'Image carousel',
     'aria-live': 'polite',
     'aria-describedby': 'carousel-instructions',
     'aria-roledescription': `carousel with ${totalItems} items`,

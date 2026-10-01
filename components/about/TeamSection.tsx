@@ -257,7 +257,7 @@ export default function TeamSection({ teamMembers }: TeamSectionProps) {
               Join Our Creative Team
             </h3>
             <p className="text-lg text-gray-200 mb-8 max-w-2xl mx-auto">
-              We're always looking for talented individuals who share our passion for visual storytelling.
+              We&apos;re always looking for talented individuals who share our passion for visual storytelling.
             </p>
             <motion.button
               whileHover={{ scale: 1.05 }}

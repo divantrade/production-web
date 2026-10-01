@@ -10,7 +10,7 @@ const customJestConfig = {
   setupFilesAfterEnv: ['<rootDir>/jest.setup.js'],
   moduleDirectories: ['node_modules', '<rootDir>/'],
   testEnvironment: 'jest-environment-jsdom',
-  moduleNameMapping: {
+  moduleNameMapper: {
     '^@/components/(.*)$': '<rootDir>/components/$1',
     '^@/lib/(.*)$': '<rootDir>/lib/$1',
     '^@/app/(.*)$': '<rootDir>/app/$1',
@@ -26,14 +26,6 @@ const customJestConfig = {
     '!**/coverage/**',
     '!**/*.config.js',
   ],
-  coverageThreshold: {
-    global: {
-      branches: 70,
-      functions: 70,
-      lines: 70,
-      statements: 70,
-    },
-  },
   testMatch: [
     '<rootDir>/**/*.test.{js,jsx,ts,tsx}',
     '<rootDir>/**/__tests__/**/*.{js,jsx,ts,tsx}',

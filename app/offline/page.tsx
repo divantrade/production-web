@@ -27,7 +27,7 @@ export default function OfflinePage() {
           transition={{ delay: 0.3 }}
           className="text-3xl font-bold text-primary mb-4"
         >
-          You're Offline
+          You&apos;re Offline
         </motion.h1>
         
         <motion.p
@@ -36,7 +36,7 @@ export default function OfflinePage() {
           transition={{ delay: 0.4 }}
           className="text-gray-600 mb-8 leading-relaxed"
         >
-          It looks like you're not connected to the internet. Please check your connection and try again.
+          It looks like you&apos;re not connected to the internet. Please check your connection and try again.
         </motion.p>
         
         <motion.button
@@ -57,7 +57,7 @@ export default function OfflinePage() {
           className="mt-12 p-6 bg-gray-50 rounded-lg"
         >
           <h3 className="font-semibold text-primary mb-2">
-            While you're offline, you can:
+            While you&apos;re offline, you can:
           </h3>
           <ul className="text-sm text-gray-600 space-y-1">
             <li>• View previously loaded content</li>

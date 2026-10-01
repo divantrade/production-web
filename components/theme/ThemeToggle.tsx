@@ -11,6 +11,28 @@ interface ThemeToggleProps {
   showLabel?: boolean;
 }
 
+function themeIcon(themeType: Theme) {
+  switch (themeType) {
+    case 'light':
+      return <HiSun className="w-5 h-5" />;
+    case 'dark':
+      return <HiMoon className="w-5 h-5" />;
+    case 'system':
+      return <HiDesktopComputer className="w-5 h-5" />;
+  }
+}
+
+function getThemeLabel(themeType: Theme) {
+  switch (themeType) {
+    case 'light':
+      return 'Light';
+    case 'dark':
+      return 'Dark';
+    case 'system':
+      return 'System';
+  }
+}
+
 export default function ThemeToggle({ 
   variant = 'icon', 
   className = '',
@@ -25,35 +47,8 @@ export default function ThemeToggle({
     setIsDropdownOpen(false);
   };
 
-  const getThemeIcon = (themeType: Theme | 'resolved') => {
-    if (themeType === 'resolved') {
-      return resolvedTheme === 'dark' ? (
-        <HiMoon className="w-5 h-5" />
-      ) : (
-        <HiSun className="w-5 h-5" />
-      );
-    }
-
-    switch (themeType) {
-      case 'light':
-        return <HiSun className="w-5 h-5" />;
-      case 'dark':
-        return <HiMoon className="w-5 h-5" />;
-      case 'system':
-        return <HiDesktopComputer className="w-5 h-5" />;
-    }
-  };
-
-  const getThemeLabel = (themeType: Theme) => {
-    switch (themeType) {
-      case 'light':
-        return 'Light';
-      case 'dark':
-        return 'Dark';
-      case 'system':
-        return 'System';
-    }
-  };
+  const getThemeIcon = (themeType: Theme | 'resolved') =>
+    themeType === 'resolved' ? themeIcon(resolvedTheme) : themeIcon(themeType);
 
   if (variant === 'switch') {
     return (
@@ -209,7 +204,7 @@ export function CompactThemeSelector({ className = '' }: { className?: string })
           }`}
           title={getThemeLabel(themeOption)}
         >
-          {getThemeIcon(themeOption)}
+          {themeIcon(themeOption)}
         </button>
       ))}
     </div>
