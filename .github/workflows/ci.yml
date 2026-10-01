@@ -48,8 +48,6 @@ jobs:
   security-scan:
     name: Security Audit
     runs-on: ubuntu-latest
-    # Report-only until the Next.js upgrade lands (see PR #2); remove once npm audit is clean
-    continue-on-error: true
 
     steps:
     - name: Checkout code
@@ -62,4 +60,6 @@ jobs:
         cache: 'npm'
 
     - name: Run security audit
+      # Report-only until the Next.js upgrade lands (see PR #2); remove once npm audit is clean
+      continue-on-error: true
       run: npm audit --omit=dev --audit-level high
