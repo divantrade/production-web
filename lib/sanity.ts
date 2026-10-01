@@ -1,5 +1,6 @@
 import { createClient } from 'next-sanity';
 import imageUrlBuilder from '@sanity/image-url';
+import { createHmac } from 'crypto';
 
 const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || 'not-configured';
 const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET || 'production';
@@ -340,9 +341,7 @@ export function isValidSignature(
   signature: string,
   secret: string
 ): boolean {
-  const crypto = require('crypto');
-  const computedSignature = crypto
-    .createHmac('sha256', secret)
+  const computedSignature = createHmac('sha256', secret)
     .update(body)
     .digest('hex');
   return signature === computedSignature;

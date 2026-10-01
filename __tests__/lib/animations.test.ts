@@ -1,156 +1,125 @@
-import { describe, it, expect, jest, beforeEach, afterEach } from '@jest/globals'
 import { renderHook, act } from '@testing-library/react'
-import { 
-  pageTransition, 
-  staggerContainer, 
-  fadeInUp, 
-  scaleIn, 
-  useScrollReveal,
-  useParallax,
+import {
+  pageTransition,
+  fadeInUp,
+  staggerContainer,
+  animationPresets,
   useCountAnimation,
-  useMagneticButton
+  useParallax,
+  useMouseFollow,
+  useScrollReveal,
+  smoothScrollTo,
 } from '@/lib/animations'
 
-// Mock framer-motion
-jest.mock('framer-motion', () => ({
-  useInView: jest.fn(() => [jest.fn(), true]),
-  useMotionValue: jest.fn(() => ({
-    get: jest.fn(() => 0),
-    set: jest.fn(),
-  })),
-  useTransform: jest.fn((motionValue, inputRange, outputRange) => ({
-    get: jest.fn(() => outputRange[0]),
-  })),
-  useSpring: jest.fn((value) => value),
-}))
-
 describe('Animation Utilities', () => {
-  describe('Animation Variants', () => {
-    it('should return correct pageTransition variant', () => {
-      const transition = pageTransition
-      expect(transition.initial).toEqual({ opacity: 0, y: 20 })
-      expect(transition.animate).toEqual({ opacity: 1, y: 0 })
-      expect(transition.exit).toEqual({ opacity: 0, y: -20 })
+  describe('variants', () => {
+    it('pageTransition defines hidden, visible and exit states', () => {
+      expect(pageTransition).toHaveProperty('hidden')
+      expect(pageTransition).toHaveProperty('visible')
+      expect(pageTransition).toHaveProperty('exit')
     })
 
-    it('should return correct staggerContainer variant', () => {
-      const container = staggerContainer(0.1, 0.2)
-      expect(container.animate.transition.staggerChildren).toBe(0.1)
-      expect(container.animate.transition.delayChildren).toBe(0.2)
+    it('fadeInUp starts hidden and offset', () => {
+      expect(fadeInUp.hidden).toMatchObject({ opacity: 0 })
+      expect(fadeInUp.visible).toMatchObject({ opacity: 1, y: 0 })
     })
 
-    it('should return correct fadeInUp variant', () => {
-      const fadeUp = fadeInUp(0.5)
-      expect(fadeUp.initial).toEqual({ opacity: 0, y: 60 })
-      expect(fadeUp.animate.transition.duration).toBe(0.5)
+    it('staggerContainer defines hidden and visible states', () => {
+      expect(staggerContainer).toHaveProperty('hidden')
+      expect(staggerContainer).toHaveProperty('visible')
     })
 
-    it('should return correct scaleIn variant', () => {
-      const scale = scaleIn(0.3, 'easeOut')
-      expect(scale.initial).toEqual({ opacity: 0, scale: 0.8 })
-      expect(scale.animate.transition.duration).toBe(0.3)
-      expect(scale.animate.transition.ease).toBe('easeOut')
+    it('exports animation presets', () => {
+      expect(Object.keys(animationPresets).length).toBeGreaterThan(0)
     })
   })
 
-  describe('useScrollReveal Hook', () => {
-    it('should return motion props for scroll reveal', () => {
-      const { result } = renderHook(() => useScrollReveal())
-      
-      expect(result.current).toHaveProperty('initial')
-      expect(result.current).toHaveProperty('whileInView')
-      expect(result.current).toHaveProperty('viewport')
-      expect(result.current.viewport).toEqual({ once: true, amount: 0.3 })
+  describe('useCountAnimation', () => {
+    it('starts at 0 and does not animate until visible', () => {
+      const { result } = renderHook(() => useCountAnimation(100))
+      expect(result.current.count).toBe(0)
+      expect(typeof result.current.setIsVisible).toBe('function')
     })
 
-    it('should accept custom variant', () => {
-      const customVariant = { initial: { opacity: 0 }, animate: { opacity: 1 } }
-      const { result } = renderHook(() => useScrollReveal(customVariant))
-      
-      expect(result.current.initial).toEqual({ opacity: 0 })
-      expect(result.current.whileInView).toEqual({ opacity: 1 })
-    })
-  })
+    it('counts up to the end value once visible', () => {
+      let now = 0
+      const callbacks: FrameRequestCallback[] = []
+      jest.spyOn(window, 'requestAnimationFrame').mockImplementation(cb => {
+        callbacks.push(cb)
+        return callbacks.length
+      })
+      jest.spyOn(window, 'cancelAnimationFrame').mockImplementation(() => {})
 
-  describe('useParallax Hook', () => {
-    it('should return parallax motion value', () => {
-      const { result } = renderHook(() => useParallax(50))
-      
-      expect(result.current).toBeDefined()
-      expect(typeof result.current.get).toBe('function')
-    })
-  })
-
-  describe('useCountAnimation Hook', () => {
-    beforeEach(() => {
-      jest.useFakeTimers()
-    })
-
-    afterEach(() => {
-      jest.useRealTimers()
-    })
-
-    it('should animate count from 0 to target', () => {
       const { result } = renderHook(() => useCountAnimation(100, 1))
-      
-      expect(result.current.count).toBe(0)
-      expect(result.current.isVisible).toBe(false)
-      
-      act(() => {
-        result.current.setIsVisible(true)
-      })
-      
-      expect(result.current.isVisible).toBe(true)
-      
-      // Fast forward time
-      act(() => {
-        jest.advanceTimersByTime(1000)
-      })
-      
-      expect(result.current.count).toBeGreaterThan(0)
-    })
+      act(() => result.current.setIsVisible(true))
 
-    it('should reset count when visibility changes', () => {
-      const { result } = renderHook(() => useCountAnimation(50))
-      
-      act(() => {
-        result.current.setIsVisible(true)
-        jest.advanceTimersByTime(500)
-      })
-      
-      act(() => {
-        result.current.setIsVisible(false)
-      })
-      
-      expect(result.current.count).toBe(0)
+      // Drive frames until the 1s animation completes
+      while (callbacks.length) {
+        const cb = callbacks.shift()!
+        act(() => cb(now))
+        now += 250
+      }
+      expect(result.current.count).toBe(100)
+      jest.restoreAllMocks()
     })
   })
 
-  describe('useMagneticButton Hook', () => {
-    it('should return mouse event handlers', () => {
-      const { result } = renderHook(() => useMagneticButton(10))
-      
-      expect(result.current).toHaveProperty('onMouseMove')
-      expect(result.current).toHaveProperty('onMouseLeave')
-      expect(typeof result.current.onMouseMove).toBe('function')
-      expect(typeof result.current.onMouseLeave).toBe('function')
+  describe('useParallax', () => {
+    it('returns the scroll offset multiplied by speed', () => {
+      const { result } = renderHook(() => useParallax(0.5))
+      expect(result.current).toBe(0)
+
+      act(() => {
+        Object.defineProperty(window, 'pageYOffset', { value: 200, configurable: true })
+        window.dispatchEvent(new Event('scroll'))
+      })
+      expect(result.current).toBe(100)
+    })
+  })
+
+  describe('useMouseFollow', () => {
+    it('tracks mouse position relative to the viewport centre', () => {
+      const { result } = renderHook(() => useMouseFollow(0.1))
+      expect(result.current).toEqual({ x: 0, y: 0 })
+
+      act(() => {
+        window.dispatchEvent(
+          new MouseEvent('mousemove', {
+            clientX: window.innerWidth / 2 + 100,
+            clientY: window.innerHeight / 2 - 50,
+          })
+        )
+      })
+      expect(result.current.x).toBeCloseTo(10)
+      expect(result.current.y).toBeCloseTo(-5)
+    })
+  })
+
+  describe('useScrollReveal', () => {
+    it('returns a ref and starts not visible', () => {
+      const { result } = renderHook(() => useScrollReveal())
+      expect(result.current.ref).toBeDefined()
+      expect(result.current.isVisible).toBe(false)
+    })
+  })
+
+  describe('smoothScrollTo', () => {
+    it('scrolls to the element offset', () => {
+      const el = document.createElement('div')
+      el.id = 'target'
+      Object.defineProperty(el, 'offsetTop', { value: 500 })
+      document.body.appendChild(el)
+      window.scrollTo = jest.fn()
+
+      smoothScrollTo('target', 100)
+      expect(window.scrollTo).toHaveBeenCalledWith({ top: 400, behavior: 'smooth' })
+      el.remove()
     })
 
-    it('should handle mouse events without crashing', () => {
-      const { result } = renderHook(() => useMagneticButton())
-      
-      const mockEvent = {
-        currentTarget: {
-          getBoundingClientRect: () => ({ left: 0, top: 0, width: 100, height: 50 })
-        },
-        clientX: 50,
-        clientY: 25
-      } as any
-
-      expect(() => {
-        result.current.onMouseMove(mockEvent)
-        result.current.onMouseLeave()
-      }).not.toThrow()
+    it('does nothing when the element is missing', () => {
+      window.scrollTo = jest.fn()
+      smoothScrollTo('missing')
+      expect(window.scrollTo).not.toHaveBeenCalled()
     })
   })
 })

@@ -1,9 +1,8 @@
 'use client';
 
 import { useState, useEffect, useMemo } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { HiSearch, HiFilter, HiChevronDown, HiX } from 'react-icons/hi';
-import { cn, debounce } from '@/lib/utils';
+import { debounce } from '@/lib/utils';
+import type { FilterOptions, LoadingState, PaginationState, WorkProject } from '@/types';
 
 // Components
 import WorkHero from './WorkHero';
@@ -12,68 +11,40 @@ import ProjectsGrid from './ProjectsGrid';
 import ProjectModal from './ProjectModal';
 
 // Types
+// Shape returned by the GROQ query in app/[locale]/work/page.tsx
 interface SanityProject {
   _id: string;
+  _createdAt: string;
+  _updatedAt: string;
   title: string;
-  slug: { current: string };
-  description: string;
-  longDescription?: string;
-  category?: {
-    _id: string;
-    title: string;
-    slug: { current: string };
-    color?: string;
-  };
-  client?: {
-    _id: string;
-    name: string;
-    industry: string;
-    logo?: any;
-  };
-  featuredImage?: any;
-  gallery?: any[];
-  videoUrl?: string;
-  videoSource?: any;
-  tags?: string[];
-  featured?: boolean;
-  completionDate?: string;
-  projectType?: string;
+  slug?: { current: string };
+  description?: string;
+  fullDescription?: string;
+  category?: { _id: string; title: string };
+  client?: { _id: string; name: string; industry?: string };
+  year?: number;
   duration?: string;
-  location?: string;
+  videoUrl?: string;
+  videoId?: string;
+  thumbnail?: string;
+  industry?: string[];
+  tags?: string[];
+  viewCount?: number;
+  featured?: boolean;
   awards?: string[];
-  budget?: string;
-  technicalSpecs?: any;
-  teamMembers?: any[];
-  testimonial?: any;
+  credits?: WorkProject['credits'];
+  technicalSpecs?: WorkProject['technicalSpecs'];
 }
 
 interface SanityCategory {
   _id: string;
   title: string;
-  slug: { current: string };
-  color?: string;
-  icon?: string;
 }
 
 interface SanityClient {
   _id: string;
   name: string;
-  industry: string;
-  logo?: any;
-}
-
-interface FilterOptions {
-  category: string;
-  year: string;
-  industry: string[];
-  sortBy: string;
-  searchQuery: string;
-}
-
-interface LoadingState {
-  isLoading: boolean;
-  isLoadingMore: boolean;
-  error: string | null;
+  industry?: string;
 }
 
 interface WorkPageClientProps {
@@ -82,14 +53,46 @@ interface WorkPageClientProps {
   clients: SanityClient[];
 }
 
+function getThumbnail(project: SanityProject): string {
+  if (project.thumbnail) return `${project.thumbnail}?w=800&auto=format`;
+  if (project.videoId) return `https://i.ytimg.com/vi/${project.videoId}/hqdefault.jpg`;
+  return '';
+}
+
+function toWorkProject(project: SanityProject): WorkProject {
+  return {
+    id: project._id,
+    title: project.title,
+    slug: project.slug?.current ?? '',
+    category: (project.category?.title ?? 'Documentary') as WorkProject['category'],
+    client: project.client?.name ?? '',
+    year: project.year ?? new Date(project._createdAt).getFullYear(),
+    duration: project.duration ?? '',
+    description: project.description ?? '',
+    fullDescription: project.fullDescription ?? project.description ?? '',
+    thumbnail: getThumbnail(project),
+    videoUrl: project.videoUrl ?? '',
+    videoId: project.videoId,
+    industry: project.industry ?? (project.client?.industry ? [project.client.industry] : []),
+    tags: project.tags ?? [],
+    viewCount: project.viewCount,
+    featured: project.featured ?? false,
+    credits: project.credits ?? {},
+    technicalSpecs: project.technicalSpecs ?? {},
+    awards: project.awards,
+    createdAt: project._createdAt,
+    updatedAt: project._updatedAt,
+  };
+}
+
+const itemsPerPage = 12;
+
 export default function WorkPageClient({
   initialProjects,
-  categories,
   clients
 }: WorkPageClientProps) {
-  const [projects, setProjects] = useState<SanityProject[]>(initialProjects);
-  const [filteredProjects, setFilteredProjects] = useState<SanityProject[]>(initialProjects);
-  const [selectedProject, setSelectedProject] = useState<SanityProject | null>(null);
+  const projects = useMemo(() => initialProjects.map(toWorkProject), [initialProjects]);
+  const [selectedProject, setSelectedProject] = useState<WorkProject | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [loading, setLoading] = useState<LoadingState>({
@@ -106,107 +109,68 @@ export default function WorkPageClient({
     searchQuery: '',
   });
 
-  const itemsPerPage = 12;
+  const availableYears = useMemo(
+    () => Array.from(new Set(projects.map(project => project.year))).sort((a, b) => b - a),
+    [projects]
+  );
 
-  // Extract available years from projects
-  const availableYears = useMemo(() => {
-    const years = projects
-      .map(project => {
-        if (project.completionDate) {
-          return new Date(project.completionDate).getFullYear().toString();
-        }
-        return null;
-      })
-      .filter(Boolean)
-      .filter((year, index, arr) => arr.indexOf(year) === index)
-      .sort((a, b) => parseInt(b!) - parseInt(a!));
-    
-    return years.filter(Boolean) as string[];
-  }, [projects]);
-
-  // Extract available industries from clients
   const availableIndustries = useMemo(() => {
-    const industries = clients
-      .map(client => client.industry)
-      .filter(Boolean)
-      .filter((industry, index, arr) => arr.indexOf(industry) === index)
-      .sort();
-    
-    return industries;
-  }, [clients]);
+    const industries = [
+      ...projects.flatMap(project => project.industry),
+      ...clients.map(client => client.industry).filter((industry): industry is string => Boolean(industry)),
+    ];
+    return Array.from(new Set(industries)).sort();
+  }, [projects, clients]);
 
-  // Apply filters and search
-  const applyFilters = useMemo(() => {
+  const filteredProjects = useMemo(() => {
     let filtered = [...projects];
 
-    // Category filter
     if (filters.category !== 'All') {
-      filtered = filtered.filter(project => project.category?.title === filters.category);
+      filtered = filtered.filter(project => project.category === filters.category);
     }
 
-    // Year filter
     if (filters.year !== 'All') {
-      filtered = filtered.filter(project => {
-        if (!project.completionDate) return false;
-        const projectYear = new Date(project.completionDate).getFullYear().toString();
-        return projectYear === filters.year;
-      });
+      filtered = filtered.filter(project => project.year === filters.year);
     }
 
-    // Industry filter
     if (filters.industry.length > 0) {
       filtered = filtered.filter(project =>
-        project.client && filters.industry.includes(project.client.industry)
+        project.industry.some(industry => filters.industry.includes(industry))
       );
     }
 
-    // Search filter
     if (filters.searchQuery.trim()) {
       const searchTerm = filters.searchQuery.toLowerCase();
       filtered = filtered.filter(project =>
         project.title.toLowerCase().includes(searchTerm) ||
-        project.description?.toLowerCase().includes(searchTerm) ||
-        project.tags?.some(tag => tag.toLowerCase().includes(searchTerm)) ||
-        project.client?.name.toLowerCase().includes(searchTerm)
+        project.description.toLowerCase().includes(searchTerm) ||
+        project.client.toLowerCase().includes(searchTerm) ||
+        project.tags.some(tag => tag.toLowerCase().includes(searchTerm))
       );
     }
 
-    // Sort
     switch (filters.sortBy) {
       case 'latest':
-        filtered.sort((a, b) => {
-          const dateA = a.completionDate ? new Date(a.completionDate).getTime() : 0;
-          const dateB = b.completionDate ? new Date(b.completionDate).getTime() : 0;
-          return dateB - dateA;
-        });
+        filtered.sort((a, b) => b.year - a.year || b.createdAt.localeCompare(a.createdAt));
         break;
-      case 'oldest':
-        filtered.sort((a, b) => {
-          const dateA = a.completionDate ? new Date(a.completionDate).getTime() : 0;
-          const dateB = b.completionDate ? new Date(b.completionDate).getTime() : 0;
-          return dateA - dateB;
-        });
-        break;
-      case 'title':
-        filtered.sort((a, b) => a.title.localeCompare(b.title));
+      case 'mostViewed':
+        filtered.sort((a, b) => (b.viewCount ?? 0) - (a.viewCount ?? 0));
         break;
       case 'featured':
-        filtered.sort((a, b) => {
-          if (a.featured && !b.featured) return -1;
-          if (!a.featured && b.featured) return 1;
-          return 0;
-        });
+        filtered.sort((a, b) => Number(b.featured) - Number(a.featured));
+        break;
+      case 'alphabetical':
+        filtered.sort((a, b) => a.title.localeCompare(b.title));
         break;
     }
 
     return filtered;
   }, [projects, filters]);
 
-  // Update filtered projects when filters change
+  // Reset to first page when filters change
   useEffect(() => {
-    setFilteredProjects(applyFilters);
-    setCurrentPage(1); // Reset to first page when filters change
-  }, [applyFilters]);
+    setCurrentPage(1);
+  }, [filteredProjects]);
 
   // Debounced search handler
   const debouncedSearch = useMemo(
@@ -224,7 +188,7 @@ export default function WorkPageClient({
     setFilters(prev => ({ ...prev, ...newFilters }));
   };
 
-  const handleProjectClick = (project: SanityProject) => {
+  const handleProjectClick = (project: WorkProject) => {
     setSelectedProject(project);
     setIsModalOpen(true);
   };
@@ -247,18 +211,25 @@ export default function WorkPageClient({
   // Get displayed projects (all pages up to current)
   const displayedProjects = useMemo(() => {
     return filteredProjects.slice(0, currentPage * itemsPerPage);
-  }, [filteredProjects, currentPage, itemsPerPage]);
+  }, [filteredProjects, currentPage]);
 
-  // Check if there are more projects to load
-  const hasMore = displayedProjects.length < filteredProjects.length;
+  const totalPages = Math.ceil(filteredProjects.length / itemsPerPage);
+  const pagination: PaginationState = {
+    currentPage,
+    totalPages,
+    totalItems: filteredProjects.length,
+    itemsPerPage,
+    hasNextPage: displayedProjects.length < filteredProjects.length,
+    hasPreviousPage: currentPage > 1,
+  };
 
   // Get related projects for modal
-  const getRelatedProjects = (project: SanityProject, limit: number = 3) => {
+  const getRelatedProjects = (project: WorkProject, limit: number = 3) => {
     return projects
-      .filter(p => p._id !== project._id)
-      .filter(p => 
-        p.category?.title === project.category?.title ||
-        p.client?._id === project.client?._id
+      .filter(p => p.id !== project.id)
+      .filter(p =>
+        p.category === project.category ||
+        (p.client !== '' && p.client === project.client)
       )
       .slice(0, limit);
   };
@@ -275,7 +246,6 @@ export default function WorkPageClient({
         onSearchChange={handleSearchChange}
         availableYears={availableYears}
         availableIndustries={availableIndustries}
-        availableCategories={categories.map(cat => cat.title)}
         totalResults={filteredProjects.length}
       />
 
@@ -283,7 +253,7 @@ export default function WorkPageClient({
       <ProjectsGrid
         projects={displayedProjects}
         loading={loading}
-        hasMore={hasMore}
+        pagination={pagination}
         onProjectClick={handleProjectClick}
         onLoadMore={handleLoadMore}
       />

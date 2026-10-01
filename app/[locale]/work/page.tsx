@@ -23,50 +23,35 @@ async function getWorkPageData() {
   try {
     const [projects, categories, clients] = await Promise.all([
       client.fetch(`
-        *[_type == "project"] | order(_createdAt desc) {
+        *[_type == "project"] | order(year desc, _createdAt desc) {
           _id,
+          _createdAt,
+          _updatedAt,
           title,
           slug,
           description,
-          longDescription,
+          fullDescription,
           category->{
             _id,
-            title,
-            slug,
-            color
+            title
           },
           client->{
             _id,
             name,
-            industry,
-            logo
+            industry
           },
-          featuredImage,
-          gallery,
-          videoUrl,
-          videoSource,
-          tags,
-          featured,
-          completionDate,
-          projectType,
+          year,
           duration,
-          location,
+          videoUrl,
+          videoId,
+          "thumbnail": thumbnail.asset->url,
+          industry,
+          tags,
+          viewCount,
+          featured,
           awards,
-          budget,
-          technicalSpecs,
-          teamMembers[]->{
-            _id,
-            name,
-            role,
-            avatar
-          },
-          testimonial->{
-            _id,
-            clientName,
-            company,
-            quote,
-            rating
-          }
+          credits,
+          technicalSpecs
         }
       `),
       client.fetch(`

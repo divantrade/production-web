@@ -1,6 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import { Link } from '@/i18n/navigation';
 
 export default function CTASection() {
   return (
@@ -35,12 +36,12 @@ export default function CTASection() {
             >
               Get in Touch
             </a>
-            <a
+            <Link
               href="/work"
               className="inline-flex items-center justify-center px-7 py-3 rounded-full border border-white/20 text-white font-semibold text-sm hover:border-white/40 hover:bg-white/5 transition-all duration-300"
             >
               View Our Work
-            </a>
+            </Link>
           </div>
         </motion.div>
       </div>

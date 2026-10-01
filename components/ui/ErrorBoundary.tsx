@@ -2,7 +2,8 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
-import { HiExclamationTriangle, HiRefresh } from 'react-icons/hi';
+import { HiRefresh } from 'react-icons/hi';
+import { HiExclamationTriangle } from 'react-icons/hi2';
 
 interface ErrorBoundaryProps {
   children: React.ReactNode;

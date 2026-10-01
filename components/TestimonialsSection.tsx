@@ -148,7 +148,7 @@ export default function TestimonialsSection() {
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.2 }}
               >
-                <div className="text-6xl text-accent mb-4 font-serif">"</div>
+                <div className="text-6xl text-accent mb-4 font-serif">&quot;</div>
                 <blockquote className="text-xl md:text-2xl text-gray-700 leading-relaxed font-light italic max-w-3xl mx-auto">
                   {currentTestimonial.quote}
                 </blockquote>

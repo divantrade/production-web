@@ -10,7 +10,7 @@ import {
   HiOutlineArrowsExpand,
   HiCog,
   HiDownload,
-  HiShareVia
+  HiShare
 } from 'react-icons/hi';
 
 interface VideoChapter {
@@ -428,7 +428,7 @@ export default function AdvancedVideoPlayer({
                   className="text-white hover:text-primary transition-colors"
                   title="Share video"
                 >
-                  <HiShareVia className="w-5 h-5" />
+                  <HiShare className="w-5 h-5" />
                 </button>
 
                 <button

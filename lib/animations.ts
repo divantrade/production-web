@@ -3,7 +3,7 @@ import { Variants } from 'framer-motion';
 import { useState, useEffect, useRef } from 'react';
 
 // Page transition variants
-export const pageTransition = {
+export const pageTransition: Variants = {
   hidden: { opacity: 0, y: 50 },
   visible: { 
     opacity: 1, 

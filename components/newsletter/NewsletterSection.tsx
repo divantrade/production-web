@@ -258,7 +258,7 @@ export default function NewsletterSection({
                   <span className="font-medium">Successfully subscribed!</span>
                 </div>
                 <p className="text-green-700 text-sm">
-                  We've sent a confirmation email to your inbox.
+                  We&apos;ve sent a confirmation email to your inbox.
                 </p>
               </div>
             )}

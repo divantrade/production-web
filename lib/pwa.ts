@@ -302,8 +302,12 @@ export const queueFormSubmission = async (formData: any, endpoint: string): Prom
     }));
 
     // Register background sync
-    if ('sync' in registration) {
-      await registration.sync.register('contact-form');
+    // Background Sync isn't in the TS DOM lib yet
+    const syncRegistration = registration as ServiceWorkerRegistration & {
+      sync?: { register: (tag: string) => Promise<void> };
+    };
+    if (syncRegistration.sync) {
+      await syncRegistration.sync.register('contact-form');
       console.log('Background sync registered for form submission');
     } else {
       // Fallback: immediate submission

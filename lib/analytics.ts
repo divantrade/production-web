@@ -27,6 +27,8 @@ export const initGA = () => {
   // Initialize gtag
   window.gtag = window.gtag || function() {
     (window as any).dataLayer = (window as any).dataLayer || [];
+    // gtag.js requires the Arguments object itself, not a rest array
+    // eslint-disable-next-line prefer-rest-params
     (window as any).dataLayer.push(arguments);
   };
 

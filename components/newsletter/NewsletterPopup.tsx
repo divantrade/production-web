@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { HiX, HiMail, HiGift, HiCheckCircle } from 'react-icons/hi';
+import { Link } from '@/i18n/navigation';
 
 interface NewsletterPopupProps {
   showDelay?: number;
@@ -230,7 +231,7 @@ export default function NewsletterPopup({
                       />
                       <label htmlFor="consent" className="text-xs text-gray-600 leading-relaxed">
                         I agree to receive marketing emails from Luxe Films. You can unsubscribe at any time. 
-                        View our <a href="/privacy" className="text-primary hover:underline">Privacy Policy</a>.
+                        View our <Link href="/privacy" className="text-primary hover:underline">Privacy Policy</Link>.
                       </label>
                     </div>
 
@@ -268,12 +269,12 @@ export default function NewsletterPopup({
                     Thank you for subscribing!
                   </h3>
                   <p className="text-gray-600 text-sm mb-4">
-                    We've sent a confirmation email to <strong>{email}</strong>. 
+                    We&apos;ve sent a confirmation email to <strong>{email}</strong>. 
                     Check your inbox and click the link to complete your subscription.
                   </p>
                   <div className="bg-gray-50 rounded-lg p-4">
                     <p className="text-xs text-gray-600">
-                      🎬 You'll receive your first behind-the-scenes update within 24 hours!
+                      🎬 You&apos;ll receive your first behind-the-scenes update within 24 hours!
                     </p>
                   </div>
                 </div>

@@ -133,7 +133,7 @@ export default function MissionVision({ siteSettings }: MissionVisionProps) {
               transition={{ delay: 0.2, type: "spring" }}
               className="text-6xl text-accent mb-6"
             >
-              "
+              &quot;
             </motion.div>
             <blockquote className="text-2xl md:text-3xl font-light text-gray-700 mb-8 italic">
               Great stories have the power to change perspectives, inspire action, and create lasting connections between people and ideas.

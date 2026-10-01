@@ -2,8 +2,8 @@
 
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { HiStar, HiQuoteLeft, HiCheck } from 'react-icons/hi';
-import { FaInstagram, FaTwitter, FaLinkedin, FaYoutube } from 'react-icons/fa';
+import { HiStar, HiCheck } from 'react-icons/hi';
+import { FaInstagram, FaTwitter, FaLinkedin, FaYoutube, FaQuoteLeft } from 'react-icons/fa';
 import Image from 'next/image';
 import ScrollReveal from '@/components/animations/ScrollReveal';
 import { staggerContainer, staggerItem } from '@/lib/animations';
@@ -192,10 +192,10 @@ export default function SocialProof({
               transition={{ duration: 0.5 }}
               className="bg-white rounded-2xl shadow-lg p-8 text-center"
             >
-              <HiQuoteLeft className="w-12 h-12 text-primary mx-auto mb-6 opacity-20" />
+              <FaQuoteLeft className="w-12 h-12 text-primary mx-auto mb-6 opacity-20" />
               
               <p className="text-lg text-gray-700 mb-6 leading-relaxed italic">
-                "{testimonials[currentTestimonial].content}"
+                &quot;{testimonials[currentTestimonial].content}&quot;
               </p>
 
               <div className="flex justify-center mb-4">
@@ -363,11 +363,11 @@ export default function SocialProof({
               >
                 <div className="flex justify-between items-start mb-4">
                   {renderStars(testimonial.rating)}
-                  <HiQuoteLeft className="w-8 h-8 text-primary opacity-20" />
+                  <FaQuoteLeft className="w-8 h-8 text-primary opacity-20" />
                 </div>
 
                 <p className="text-gray-700 mb-6 leading-relaxed">
-                  "{testimonial.content}"
+                  &quot;{testimonial.content}&quot;
                 </p>
 
                 <div className="border-t pt-4">

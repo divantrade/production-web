@@ -1,6 +1,6 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { motion, type Variants } from 'framer-motion';
 import { useScrollReveal } from '@/lib/animations';
 
 interface ScrollRevealProps {
@@ -45,7 +45,7 @@ export default function ScrollReveal({
 }: ScrollRevealProps) {
   const { ref, isVisible } = useScrollReveal({ threshold });
 
-  const variants = {
+  const variants: Variants = {
     ...animationVariants[animation],
     visible: {
       ...animationVariants[animation].visible,

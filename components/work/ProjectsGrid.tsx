@@ -59,7 +59,7 @@ function EmptyState() {
         </div>
         <h3 className="text-xl font-semibold text-gray-900 mb-2">No projects found</h3>
         <p className="text-gray-600">
-          Try adjusting your filters or search terms to find what you're looking for.
+          Try adjusting your filters or search terms to find what you&apos;re looking for.
         </p>
       </div>
     </motion.div>
@@ -229,7 +229,7 @@ export default function ProjectsGrid({
             className="text-center mt-8 pt-8 border-t border-gray-200"
           >
             <p className="text-gray-600">
-              You've reached the end of our portfolio. 
+              You&apos;ve reached the end of our portfolio. 
               <span className="block mt-1 text-sm">
                 Want to see more? <a href="#contact" className="text-accent hover:underline">Get in touch</a> to discuss your next project.
               </span>
