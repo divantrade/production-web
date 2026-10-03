@@ -2,6 +2,7 @@
 
 import { LuMail, LuPhone, LuMapPin, LuArrowUpRight } from 'react-icons/lu';
 import { useTranslations, useLocale } from 'next-intl';
+import { siteConfig, hasContactInfo } from '@/lib/site-config';
 
 const serviceKeys = ['researchScript', 'interviewProduction', 'dramaDocudrama', 'fullEpisodeProduction', 'voiceOver', 'graphics'] as const;
 
@@ -13,10 +14,18 @@ export default function Footer() {
   const quickLinks = [
     { label: tNav('home'), href: `/${locale}` },
     { label: tNav('ourWork'), href: `/${locale}/work` },
-    { label: tNav('services'), href: '#services' },
+    { label: tNav('services'), href: `/${locale}#services` },
     { label: tNav('about'), href: `/${locale}/about` },
-    { label: tNav('contact'), href: '#contact' },
+    ...(hasContactInfo ? [{ label: tNav('contact'), href: '#contact' }] : []),
   ];
+
+  const { email, phone, whatsapp, city } = siteConfig.contact;
+  const contactItems = [
+    email && { icon: LuMail, label: email, href: `mailto:${email}` },
+    phone && { icon: LuPhone, label: phone, href: `tel:${phone.replace(/\s+/g, '')}` },
+    whatsapp && { icon: LuPhone, label: 'WhatsApp', href: `https://wa.me/${whatsapp}` },
+    city && { icon: LuMapPin, label: city },
+  ].filter(Boolean) as { icon: typeof LuMail; label: string; href?: string }[];
 
   return (
     <footer className="relative bg-zinc-950 overflow-hidden">
@@ -32,40 +41,20 @@ export default function Footer() {
         <div className="flex flex-col lg:flex-row justify-between items-start gap-10 mb-14">
           <div className="max-w-md">
             <a href={`/${locale}`} className="inline-block text-2xl font-bold mb-4">
-              <span className="text-gradient">LUXE</span><span className="text-white">FILMS</span>
+              <span className="text-gradient">LUXOR</span><span className="text-white">FILM</span>
             </a>
             <p className="text-zinc-500 text-sm leading-relaxed">
               {t('brand.description')}
             </p>
           </div>
 
-          <div className="flex flex-col items-start lg:items-end gap-3">
-            <a
-              href="mailto:info@luxefilms.com"
-              className="group flex items-center gap-2 text-zinc-400 hover:text-accent transition-colors duration-200"
-            >
-              <span className="text-sm">info@luxefilms.com</span>
-              <LuArrowUpRight className="h-3.5 w-3.5 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
-            </a>
-            <a
-              href="tel:+201000000000"
-              className="group flex items-center gap-2 text-zinc-400 hover:text-accent transition-colors duration-200"
-            >
-              <span className="text-sm">+20 100 000 0000</span>
-              <LuArrowUpRight className="h-3.5 w-3.5 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
-            </a>
-            <div className="flex items-center gap-2 text-zinc-500">
-              <LuMapPin className="h-3.5 w-3.5 text-accent/60" />
-              <span className="text-sm">Cairo, Egypt</span>
-            </div>
-          </div>
         </div>
 
         {/* Divider */}
         <div className="h-px bg-white/[0.06] mb-10" />
 
         {/* Links grid - 4 columns for full width */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-10 mb-14">
+        <div className={`grid grid-cols-2 ${contactItems.length ? 'md:grid-cols-4' : 'md:grid-cols-3'} gap-10 mb-14`}>
           {/* Quick Links */}
           <div>
             <h4 className="text-xs font-semibold text-accent uppercase tracking-widest mb-5">{t('navigation')}</h4>
@@ -96,33 +85,27 @@ export default function Footer() {
           </div>
 
           {/* Contact */}
-          <div id="contact">
-            <h4 className="text-xs font-semibold text-accent uppercase tracking-widest mb-5">{t('getInTouch')}</h4>
-            <ul className="space-y-4">
-              <li className="flex items-center gap-3">
-                <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-white/[0.04] border border-white/[0.06]">
-                  <LuMail className="h-3.5 w-3.5 text-accent" />
-                </span>
-                <a href="mailto:info@luxefilms.com" className="text-zinc-500 hover:text-white text-sm transition-colors">
-                  info@luxefilms.com
-                </a>
-              </li>
-              <li className="flex items-center gap-3">
-                <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-white/[0.04] border border-white/[0.06]">
-                  <LuPhone className="h-3.5 w-3.5 text-accent" />
-                </span>
-                <a href="tel:+201000000000" className="text-zinc-500 hover:text-white text-sm transition-colors">
-                  +20 100 000 0000
-                </a>
-              </li>
-              <li className="flex items-center gap-3">
-                <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-white/[0.04] border border-white/[0.06]">
-                  <LuMapPin className="h-3.5 w-3.5 text-accent" />
-                </span>
-                <span className="text-zinc-500 text-sm">Cairo, Egypt</span>
-              </li>
-            </ul>
-          </div>
+          {contactItems.length > 0 && (
+            <div id="contact">
+              <h4 className="text-xs font-semibold text-accent uppercase tracking-widest mb-5">{t('getInTouch')}</h4>
+              <ul className="space-y-4">
+                {contactItems.map(({ icon: Icon, label, href }) => (
+                  <li key={label} className="flex items-center gap-3">
+                    <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-white/[0.04] border border-white/[0.06]">
+                      <Icon className="h-3.5 w-3.5 text-accent" />
+                    </span>
+                    {href ? (
+                      <a href={href} dir="ltr" className="text-zinc-500 hover:text-white text-sm transition-colors">
+                        {label}
+                      </a>
+                    ) : (
+                      <span className="text-zinc-500 text-sm">{label}</span>
+                    )}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
 
           {/* About */}
           <div>
@@ -146,10 +129,6 @@ export default function Footer() {
           <p className="text-zinc-600 text-xs">
             {t('copyright', { year: new Date().getFullYear() })}
           </p>
-          <div className="flex items-center gap-6">
-            <a href="#" className="text-zinc-600 hover:text-zinc-400 text-xs transition-colors">{t('privacyPolicy')}</a>
-            <a href="#" className="text-zinc-600 hover:text-zinc-400 text-xs transition-colors">{t('termsOfService')}</a>
-          </div>
         </div>
       </div>
     </footer>

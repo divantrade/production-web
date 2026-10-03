@@ -5,6 +5,7 @@ import { useTranslations, useLocale } from 'next-intl';
 import Typewriter from './Typewriter';
 import Button from './Button';
 import ScrollIndicator from './ScrollIndicator';
+import { hasContactInfo } from '@/lib/site-config';
 
 export default function HeroSection() {
   const t = useTranslations('hero');
@@ -82,9 +83,11 @@ export default function HeroSection() {
           <Button size="lg" variant="primary" onClick={handleViewWork}>
             {t('viewWork')}
           </Button>
-          <Button size="lg" variant="secondary" onClick={handleGetInTouch}>
-            {t('getInTouch')}
-          </Button>
+          {hasContactInfo && (
+            <Button size="lg" variant="secondary" onClick={handleGetInTouch}>
+              {t('getInTouch')}
+            </Button>
+          )}
         </motion.div>
       </div>
 

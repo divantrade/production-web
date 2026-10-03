@@ -5,8 +5,8 @@ import WorkPageClient from '@/components/work/WorkPageClient';
 export const revalidate = 1800;
 
 export const metadata = {
-  title: 'Our Work - Luxe Films',
-  description: 'Explore our portfolio of premium documentaries, commercials, and music videos. See the quality and creativity that defines Luxe Films.',
+  title: 'Our Work - Luxor Film',
+  description: 'Explore our portfolio of premium documentaries, commercials, and music videos. See the quality and creativity that defines Luxor Film.',
 };
 
 async function getWorkPageData() {

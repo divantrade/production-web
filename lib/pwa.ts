@@ -241,7 +241,7 @@ export const showUpdateAvailableNotification = (): void => {
   const event = new CustomEvent('pwa-update-available', {
     detail: {
       title: 'Update Available',
-      message: 'A new version of Luxe Films is available. Refresh to update.',
+      message: 'A new version of Luxor Film is available. Refresh to update.',
     },
   });
   window.dispatchEvent(event);

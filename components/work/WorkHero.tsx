@@ -1,9 +1,11 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
+import { useTranslations } from 'next-intl';
 
 export default function WorkHero() {
+  const t = useTranslations('work');
   const containerRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -51,7 +53,7 @@ export default function WorkHero() {
           transition={{ duration: 1, delay: 0.2 }}
           className="text-6xl md:text-8xl lg:text-9xl font-bold text-white mb-6 leading-tight"
         >
-          Our Portfolio
+          {t('heroHeading')}
         </motion.h1>
 
         {/* Subtitle */}
@@ -61,7 +63,7 @@ export default function WorkHero() {
           transition={{ duration: 1, delay: 0.4 }}
           className="text-xl md:text-2xl text-accent font-light mb-8 tracking-wide"
         >
-          Crafting Visual Excellence Since 2014
+          {t('heroSubtitle')}
         </motion.p>
 
         {/* Description */}
@@ -72,9 +74,7 @@ export default function WorkHero() {
           className="max-w-2xl mx-auto"
         >
           <p className="text-lg text-gray-300 leading-relaxed mb-8">
-            Every project we undertake is a testament to our commitment to storytelling excellence. 
-            From intimate documentaries to grand commercial productions, we bring passion, 
-            creativity, and technical mastery to every frame.
+            {t('heroDescription')}
           </p>
           
           {/* Decorative line */}
@@ -84,27 +84,6 @@ export default function WorkHero() {
             transition={{ duration: 1, delay: 1 }}
             className="h-0.5 bg-gradient-to-r from-accent to-yellow-300 mx-auto"
           />
-        </motion.div>
-
-        {/* Stats */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.8 }}
-          className="grid grid-cols-3 gap-8 mt-16 max-w-lg mx-auto"
-        >
-          <div className="text-center">
-            <div className="text-3xl md:text-4xl font-bold text-accent mb-2">150+</div>
-            <div className="text-sm text-gray-400 uppercase tracking-wider">Projects</div>
-          </div>
-          <div className="text-center">
-            <div className="text-3xl md:text-4xl font-bold text-accent mb-2">25+</div>
-            <div className="text-sm text-gray-400 uppercase tracking-wider">Awards</div>
-          </div>
-          <div className="text-center">
-            <div className="text-3xl md:text-4xl font-bold text-accent mb-2">80+</div>
-            <div className="text-sm text-gray-400 uppercase tracking-wider">Clients</div>
-          </div>
         </motion.div>
       </motion.div>
 
@@ -118,7 +97,7 @@ export default function WorkHero() {
       >
         <div className="flex flex-col items-center space-y-2">
           <span className="text-white text-xs font-light tracking-widest uppercase">
-            Explore Work
+            {t('exploreWork')}
           </span>
           <motion.div
             animate={{ y: [0, 8, 0] }}

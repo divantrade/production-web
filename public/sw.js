@@ -1,18 +1,15 @@
-// Service Worker for Luxe Films PWA
-const CACHE_NAME = 'luxe-films-v1';
-const STATIC_CACHE_NAME = 'luxe-films-static-v1';
-const DYNAMIC_CACHE_NAME = 'luxe-films-dynamic-v1';
+// Service Worker for Luxor Film PWA
+const CACHE_NAME = 'luxor-film-v2';
+const STATIC_CACHE_NAME = 'luxor-film-static-v2';
+const DYNAMIC_CACHE_NAME = 'luxor-film-dynamic-v2';
 
-// Static assets to cache immediately
+// Static assets to cache immediately. Every entry must return 200 without a
+// redirect, otherwise cache.addAll() rejects and nothing gets cached.
 const STATIC_ASSETS = [
-  '/',
-  '/work',
-  '/about',
-  '/services',
-  '/contact',
+  '/en',
+  '/ar',
   '/offline',
-  '/manifest.json',
-  // Add critical CSS and JS files
+  '/manifest.webmanifest',
 ];
 
 // Install event - cache static assets
@@ -272,7 +269,7 @@ self.addEventListener('push', (event) => {
       body: data.body,
       icon: '/icons/icon-192x192.png',
       badge: '/icons/badge-72x72.png',
-      tag: 'luxe-films-notification',
+      tag: 'luxor-film-notification',
       requireInteraction: true,
       actions: [
         {

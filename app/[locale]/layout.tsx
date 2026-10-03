@@ -6,11 +6,12 @@ import { getMessages } from 'next-intl/server';
 import { notFound } from 'next/navigation';
 import { routing } from '@/i18n/routing';
 import Navigation from "@/components/Navigation";
+import Footer from "@/components/footer/Footer";
+import { siteConfig } from "@/lib/site-config";
 import LoadingAnimation from "@/components/LoadingAnimation";
 import PWAInstallPrompt, { NetworkStatus } from "@/components/ui/PWAInstallPrompt";
 import PWAProvider from "@/components/PWAProvider";
 import { generateMetadata as genMeta, generateStructuredData, generateJsonLd } from "@/lib/metadata";
-import { client } from "@/lib/sanity";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -25,7 +26,7 @@ const cairo = Cairo({
 });
 
 export const metadata: Metadata = genMeta({
-  title: "Luxe Films - Documentary Production Company",
+  title: "Luxor Film - Documentary Production Company",
   description: "Specialized documentary production company offering research, script development, interview production, drama, and full episode delivery worldwide.",
   keywords: ["documentary production", "film production", "interview production", "docudrama", "script development", "research", "episode production", "corporate video"],
   ogType: "website",
@@ -35,43 +36,6 @@ export const viewport = {
   width: "device-width",
   initialScale: 1,
 };
-
-async function getOrganizationData() {
-  try {
-    const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID;
-    if (!projectId || projectId === 'your-project-id' || projectId === 'not-configured') {
-      return {
-        phone: '+20-100-000-0000',
-        email: 'info@luxefilms.com',
-        city: 'Cairo',
-        state: '',
-        country: 'EG',
-      };
-    }
-
-    const siteSettings = await client.fetch(`
-      *[_type == "siteSettings"][0] {
-        contactInfo
-      }
-    `);
-
-    return {
-      phone: siteSettings?.contactInfo?.phone || '+20-100-000-0000',
-      email: siteSettings?.contactInfo?.email || 'info@luxefilms.com',
-      city: 'Cairo',
-      state: '',
-      country: 'EG',
-    };
-  } catch (error) {
-    return {
-      phone: '+20-100-000-0000',
-      email: 'info@luxefilms.com',
-      city: 'Cairo',
-      state: '',
-      country: 'EG',
-    };
-  }
-}
 
 export default async function LocaleLayout({
   children,
@@ -88,8 +52,7 @@ export default async function LocaleLayout({
 
   const messages = await getMessages();
   const isRTL = locale === 'ar';
-  const organizationData = await getOrganizationData();
-  const organizationSchema = generateStructuredData('organization', organizationData);
+  const organizationSchema = generateStructuredData('organization', siteConfig.contact);
   const websiteSchema = generateStructuredData('website', {});
 
   return (
@@ -105,6 +68,7 @@ export default async function LocaleLayout({
             <NetworkStatus />
             <Navigation />
             <main>{children}</main>
+            <Footer />
             <PWAInstallPrompt />
           </PWAProvider>
         </NextIntlClientProvider>

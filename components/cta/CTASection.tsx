@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { useTranslations, useLocale } from 'next-intl';
+import { hasContactInfo } from '@/lib/site-config';
 
 export default function CTASection() {
   const t = useTranslations('cta');
@@ -34,12 +35,14 @@ export default function CTASection() {
             {t('description')}
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <a
-              href="#contact"
-              className="inline-flex items-center justify-center px-8 py-3.5 rounded-full bg-accent text-black font-semibold text-sm hover:bg-accent/90 transition-all duration-300 hover:scale-105"
-            >
-              {t('getInTouch')}
-            </a>
+            {hasContactInfo && (
+              <a
+                href="#contact"
+                className="inline-flex items-center justify-center px-8 py-3.5 rounded-full bg-accent text-black font-semibold text-sm hover:bg-accent/90 transition-all duration-300 hover:scale-105"
+              >
+                {t('getInTouch')}
+              </a>
+            )}
             <a
               href={`/${locale}/work`}
               className="inline-flex items-center justify-center px-8 py-3.5 rounded-full border border-white/20 text-white font-semibold text-sm hover:border-white/40 hover:bg-white/5 transition-all duration-300 hover:scale-105"

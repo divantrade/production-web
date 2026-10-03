@@ -1,5 +1,6 @@
 import { Metadata } from 'next';
 import React from 'react';
+import { siteConfig } from '@/lib/site-config';
 
 interface SEOData {
   title: string;
@@ -20,11 +21,10 @@ interface SEOData {
 }
 
 const defaultSEO = {
-  siteName: 'Luxe Films',
-  siteUrl: process.env.NEXT_PUBLIC_SITE_URL || 'https://luxefilms.com',
-  description: 'Premium Documentary & Commercial Production - Creating compelling visual narratives that inspire and engage audiences worldwide.',
+  siteName: siteConfig.name,
+  siteUrl: siteConfig.url,
+  description: 'Documentary production company offering research, script development, interview production, drama, and full episode delivery.',
   ogImage: '/images/og-default.jpg',
-  twitterHandle: '@luxefilms',
 };
 
 export function generateMetadata(seoData: SEOData): Metadata {
@@ -85,8 +85,6 @@ export function generateMetadata(seoData: SEOData): Metadata {
       card: 'summary_large_image',
       title: fullTitle,
       description,
-      creator: defaultSEO.twitterHandle,
-      site: defaultSEO.twitterHandle,
       images: [ogImageUrl],
     },
     robots: {
@@ -117,25 +115,21 @@ export function generateStructuredData(type: string, data: any) {
         name: defaultSEO.siteName,
         description: defaultSEO.description,
         url: baseUrl,
-        logo: `${baseUrl}/images/logo.png`,
-        sameAs: [
-          'https://twitter.com/luxefilms',
-          'https://linkedin.com/company/luxefilms',
-          'https://instagram.com/luxefilms',
-          'https://youtube.com/luxefilms',
-        ],
-        contactPoint: {
-          '@type': 'ContactPoint',
-          telephone: data.phone,
-          contactType: 'customer service',
-          email: data.email,
-        },
-        address: {
-          '@type': 'PostalAddress',
-          addressLocality: data.city,
-          addressRegion: data.state,
-          addressCountry: data.country,
-        },
+        ...(siteConfig.social.length > 0 && { sameAs: siteConfig.social }),
+        ...((data.email || data.phone) && {
+          contactPoint: {
+            '@type': 'ContactPoint',
+            contactType: 'customer service',
+            ...(data.phone && { telephone: data.phone }),
+            ...(data.email && { email: data.email }),
+          },
+        }),
+        ...(data.city && {
+          address: {
+            '@type': 'PostalAddress',
+            addressLocality: data.city,
+          },
+        }),
       };
 
     case 'video':
@@ -152,10 +146,6 @@ export function generateStructuredData(type: string, data: any) {
         publisher: {
           '@type': 'Organization',
           name: defaultSEO.siteName,
-          logo: {
-            '@type': 'ImageObject',
-            url: `${baseUrl}/images/logo.png`,
-          },
         },
       };
 
@@ -178,14 +168,6 @@ export function generateStructuredData(type: string, data: any) {
         name: defaultSEO.siteName,
         description: defaultSEO.description,
         url: baseUrl,
-        potentialAction: {
-          '@type': 'SearchAction',
-          target: {
-            '@type': 'EntryPoint',
-            urlTemplate: `${baseUrl}/search?q={search_term_string}`,
-          },
-          'query-input': 'required name=search_term_string',
-        },
       };
 
     case 'service':

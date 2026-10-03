@@ -60,9 +60,7 @@ export default function OfflinePage() {
             While you&apos;re offline, you can:
           </h3>
           <ul className="text-sm text-gray-600 space-y-1">
-            <li>• View previously loaded content</li>
-            <li>• Check your saved projects</li>
-            <li>• Review our contact information</li>
+            <li>• View pages you have already opened</li>
           </ul>
         </motion.div>
       </motion.div>

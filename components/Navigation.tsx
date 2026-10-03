@@ -8,6 +8,7 @@ import { cn } from '@/lib/utils';
 import { useTranslations, useLocale } from 'next-intl';
 import { useRouter, usePathname } from '@/i18n/navigation';
 import LanguageSwitcher from './LanguageSwitcher';
+import { hasContactInfo } from '@/lib/site-config';
 
 const serviceIcons = [LuFilm, LuFileSearch, LuClapperboard, LuMic, LuTv, LuPenTool, LuGlobe, LuMicVocal, LuPalette];
 const serviceKeys = ['documentary', 'investigationsResearch', 'dramaDocudrama', 'interviewProduction', 'fullEpisodeProduction', 'scriptDevelopment', 'internationalProduction', 'voiceOver', 'graphics'] as const;
@@ -29,7 +30,7 @@ export default function Navigation() {
   const navItems = [
     { label: t('ourWork'), href: '/work' },
     { label: t('about'), href: '/about' },
-    { label: t('contact'), href: '#contact' },
+    ...(hasContactInfo ? [{ label: t('contact'), href: '#contact' }] : []),
   ];
 
   const serviceItems = serviceKeys.map((key, i) => ({
@@ -55,7 +56,12 @@ export default function Navigation() {
     if (!isClient) return;
     if (href.startsWith('#')) {
       const element = document.querySelector(href);
-      element?.scrollIntoView({ behavior: 'smooth' });
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      } else {
+        // Section lives on the home page
+        router.push(`/${href}`);
+      }
     } else {
       router.push(href);
     }
@@ -91,7 +97,7 @@ export default function Navigation() {
             className="flex-shrink-0"
           >
             <a href={`/${locale}`} className="block text-2xl font-bold text-white hover:opacity-80 transition-opacity">
-              <span className="text-gradient">LUXE</span><span className="text-white">FILMS</span>
+              <span className="text-gradient">LUXOR</span><span className="text-white">FILM</span>
             </a>
           </motion.div>
 
@@ -197,13 +203,15 @@ export default function Navigation() {
           {/* Right side */}
           <div className="flex items-center gap-3 ml-auto lg:ml-0 flex-shrink-0">
             <LanguageSwitcher className="hidden lg:flex" />
-            <a
-              href="#contact"
-              onClick={(e) => { e.preventDefault(); handleNavClick('#contact'); }}
-              className="hidden lg:inline-flex items-center px-5 py-2 rounded-full bg-accent text-black text-sm font-semibold hover:bg-accent/90 transition-colors"
-            >
-              {t('getQuote')}
-            </a>
+            {hasContactInfo && (
+              <a
+                href="#contact"
+                onClick={(e) => { e.preventDefault(); handleNavClick('#contact'); }}
+                className="hidden lg:inline-flex items-center px-5 py-2 rounded-full bg-accent text-black text-sm font-semibold hover:bg-accent/90 transition-colors"
+              >
+                {t('getQuote')}
+              </a>
+            )}
 
             {/* Mobile menu button */}
             <div className="lg:hidden">
@@ -297,13 +305,15 @@ export default function Navigation() {
 
               <div className="pt-3 border-t border-white/[0.06] space-y-3">
                 <LanguageSwitcher className="w-full" />
-                <a
-                  href="#contact"
-                  onClick={(e) => { e.preventDefault(); handleNavClick('#contact'); }}
-                  className="block text-center px-4 py-3 rounded-full bg-accent text-black font-semibold"
-                >
-                  {t('getQuote')}
-                </a>
+                {hasContactInfo && (
+                  <a
+                    href="#contact"
+                    onClick={(e) => { e.preventDefault(); handleNavClick('#contact'); }}
+                    className="block text-center px-4 py-3 rounded-full bg-accent text-black font-semibold"
+                  >
+                    {t('getQuote')}
+                  </a>
+                )}
               </div>
             </div>
           </motion.div>
