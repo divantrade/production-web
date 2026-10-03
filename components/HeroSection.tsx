@@ -39,8 +39,11 @@ export default function HeroSection() {
         poster="/images/hero-poster.jpg"
         key="hero-video"
       >
-        {/* Lighter encode for phones; browsers without <source media> support use the first source */}
+        {/* The browser plays the first source whose media query matches and codec it supports:
+            AV1 (smaller, sharper) first, H.264 as the fallback for devices without AV1 */}
+        <source src="/videos/hero-720-av1.mp4" type='video/mp4; codecs="av01.0.05M.08"' media="(max-width: 767px)" />
         <source src="/videos/hero-720.mp4" type="video/mp4" media="(max-width: 767px)" />
+        <source src="/videos/hero-1080-av1.mp4" type='video/mp4; codecs="av01.0.08M.08"' />
         <source src="/videos/hero-1080.mp4" type="video/mp4" />
       </video>
 
