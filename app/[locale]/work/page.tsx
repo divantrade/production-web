@@ -1,13 +1,14 @@
 import { client } from '@/lib/sanity';
 import WorkPageClient from '@/components/work/WorkPageClient';
+import { pageMetadata } from '@/lib/metadata';
 
 // ISR: Revalidate every 30 minutes
 export const revalidate = 1800;
 
-export const metadata = {
-  title: 'Our Work - Luxor Film',
-  description: 'Explore our portfolio of premium documentaries, commercials, and music videos. See the quality and creativity that defines Luxor Film.',
-};
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
+  return pageMetadata(locale, 'work');
+}
 
 async function getWorkPageData() {
   const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID;

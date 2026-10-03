@@ -1,91 +1,65 @@
 import { Metadata } from 'next';
 import React from 'react';
+import { getTranslations } from 'next-intl/server';
 import { siteConfig } from '@/lib/site-config';
-
-interface SEOData {
-  title: string;
-  description: string;
-  canonical?: string;
-  ogImage?: string;
-  ogType?: 'website' | 'article' | 'video.movie' | 'video.episode';
-  publishedTime?: string;
-  modifiedTime?: string;
-  keywords?: string[];
-  author?: string;
-  videoData?: {
-    url: string;
-    duration?: string;
-    uploadDate?: string;
-    thumbnail?: string;
-  };
-}
+import { routing } from '@/i18n/routing';
 
 const defaultSEO = {
   siteName: siteConfig.name,
   siteUrl: siteConfig.url,
   description: 'Documentary production company offering research, script development, interview production, drama, and full episode delivery.',
-  ogImage: '/images/og-default.jpg',
+  // Bump ?v= after regenerating the image: WhatsApp and others cache previews by URL
+  ogImage: '/images/og-default.jpg?v=2',
 };
 
-export function generateMetadata(seoData: SEOData): Metadata {
-  const {
-    title,
-    description,
-    canonical,
-    ogImage = defaultSEO.ogImage,
-    ogType = 'website',
-    publishedTime,
-    modifiedTime,
-    keywords = [],
-    author,
-  } = seoData;
+export type PageKey = 'home' | 'about' | 'work';
 
-  const fullTitle = title.includes(defaultSEO.siteName) 
-    ? title 
-    : `${title} | ${defaultSEO.siteName}`;
+const pagePaths: Record<PageKey, string> = { home: '', about: '/about', work: '/work' };
+const ogLocales: Record<string, string> = { en: 'en_US', ar: 'ar_EG' };
 
-  const canonicalUrl = canonical || defaultSEO.siteUrl;
-  const ogImageUrl = ogImage.startsWith('http') ? ogImage : `${defaultSEO.siteUrl}${ogImage}`;
+// Localized title/description, canonical + hreflang URLs, and the share card
+// (Open Graph / Twitter) for a page, from the `meta` namespace in messages/*.json.
+export async function pageMetadata(locale: string, page: PageKey): Promise<Metadata> {
+  const t = await getTranslations({ locale, namespace: 'meta' });
+  const path = pagePaths[page];
+  const urlFor = (l: string) => `${defaultSEO.siteUrl}/${l}${path}`;
+  const url = urlFor(locale);
+  const title = t(`${page}.title`);
+  const description = t(`${page}.description`);
+  const image = { url: defaultSEO.ogImage, width: 1200, height: 630, alt: t('imageAlt'), type: 'image/jpeg' };
 
   return {
-    title: fullTitle,
+    metadataBase: new URL(defaultSEO.siteUrl),
+    title,
     description,
-    keywords: keywords.join(', '),
-    authors: author ? [{ name: author }] : undefined,
-    creator: defaultSEO.siteName,
-    publisher: defaultSEO.siteName,
+    applicationName: t('siteName'),
+    alternates: {
+      canonical: url,
+      languages: {
+        ...Object.fromEntries(routing.locales.map((l) => [l, urlFor(l)])),
+        'x-default': urlFor(routing.defaultLocale),
+      },
+    },
+    openGraph: {
+      type: 'website',
+      url,
+      siteName: t('siteName'),
+      title,
+      description,
+      locale: ogLocales[locale] ?? 'en_US',
+      alternateLocale: routing.locales.filter((l) => l !== locale).map((l) => ogLocales[l]),
+      images: [image],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title,
+      description,
+      images: [image.url],
+    },
     formatDetection: {
       email: false,
       address: false,
       telephone: false,
-    },
-    metadataBase: new URL(defaultSEO.siteUrl),
-    alternates: {
-      canonical: canonicalUrl,
-    },
-    openGraph: {
-      title: fullTitle,
-      description,
-      url: canonicalUrl,
-      siteName: defaultSEO.siteName,
-      type: ogType,
-      publishedTime,
-      modifiedTime,
-      images: [
-        {
-          url: ogImageUrl,
-          width: 1200,
-          height: 630,
-          alt: title,
-        },
-      ],
-      locale: 'en_US',
-    },
-    twitter: {
-      card: 'summary_large_image',
-      title: fullTitle,
-      description,
-      images: [ogImageUrl],
     },
     robots: {
       index: true,
