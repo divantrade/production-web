@@ -30,7 +30,7 @@ export default function HeroSection() {
     <section id="home" className="relative h-screen flex items-center justify-center overflow-hidden">
       {/* Video Background */}
       <video
-        className="absolute inset-0 w-full h-full object-cover"
+        className="absolute inset-0 w-full h-full object-cover object-[60%_40%]"
         autoPlay
         loop
         muted
