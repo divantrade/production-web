@@ -35,13 +35,17 @@ export default function HeroSection() {
         loop
         muted
         playsInline
+        preload="auto"
+        poster="/images/hero-poster.jpg"
         key="hero-video"
       >
-        <source src="/videos/hero-video.mp4" type="video/mp4" />
+        {/* Lighter encode for phones; browsers without <source media> support use the first source */}
+        <source src="/videos/hero-720.mp4" type="video/mp4" media="(max-width: 767px)" />
+        <source src="/videos/hero-1080.mp4" type="video/mp4" />
       </video>
 
       {/* Dark overlay */}
-      <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/30 to-black/70" />
+      <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/15 to-black/60" />
 
       {/* Content */}
       <div className="relative z-10 text-center max-w-4xl mx-auto px-4">
