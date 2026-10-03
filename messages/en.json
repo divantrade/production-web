@@ -171,5 +171,21 @@
         "alphabetical": "A-Z"
       }
     }
+  },
+  "meta": {
+    "siteName": "Luxor Film",
+    "home": {
+      "title": "Luxor Film | Documentary Production Company",
+      "description": "Documentary production from research to broadcast: research and script development, interviews filmed in any country, drama scenes, and full episodes ready for broadcast."
+    },
+    "about": {
+      "title": "About Us | Luxor Film",
+      "description": "Luxor Film is a documentary production company. We support production companies and networks at any stage of a documentary, or take on the whole production."
+    },
+    "work": {
+      "title": "Our Work | Luxor Film",
+      "description": "A selection of documentary work by Luxor Film: research, interviews, drama scenes, and full episodes."
+    },
+    "imageAlt": "Luxor Film, documentary production"
   }
 }

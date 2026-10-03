@@ -11,7 +11,7 @@ import { siteConfig } from "@/lib/site-config";
 import LoadingAnimation from "@/components/LoadingAnimation";
 import PWAInstallPrompt, { NetworkStatus } from "@/components/ui/PWAInstallPrompt";
 import PWAProvider from "@/components/PWAProvider";
-import { generateMetadata as genMeta, generateStructuredData, generateJsonLd } from "@/lib/metadata";
+import { pageMetadata, generateStructuredData, generateJsonLd } from "@/lib/metadata";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -25,12 +25,10 @@ const cairo = Cairo({
   display: 'swap',
 });
 
-export const metadata: Metadata = genMeta({
-  title: "Luxor Film - Documentary Production Company",
-  description: "Specialized documentary production company offering research, script development, interview production, drama, and full episode delivery worldwide.",
-  keywords: ["documentary production", "film production", "interview production", "docudrama", "script development", "research", "episode production", "corporate video"],
-  ogType: "website",
-});
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await params;
+  return pageMetadata(locale, 'home');
+}
 
 export const viewport = {
   width: "device-width",
