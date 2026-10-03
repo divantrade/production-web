@@ -1,24 +1,13 @@
-# Video Files
+# Hero Video
 
-## Hero Video
-Place your hero video file as `hero.mp4` in this directory.
+The home page hero plays `hero-1080.mp4` (desktop) and `hero-720.mp4` (phones), muted and looping, with `/images/hero-poster.jpg` shown while it loads. Source: `PROMO 03.mp4`.
 
-**Recommended specifications:**
-- Format: MP4 (H.264)
-- Resolution: 1920x1080 or higher
-- Duration: 10-30 seconds (should loop well)
-- Size: < 10MB for good loading performance
-- Aspect Ratio: 16:9 landscape
+To replace it, re-encode the new source with no audio and `faststart`, then regenerate the poster from the first frame:
 
-**Sample video sources:**
-- Use any cinematic B-roll footage
-- Consider abstract/motion graphics
-- Ensure it's suitable for background use (not too distracting)
+```bash
+ffmpeg -i source.mp4 -an -c:v libx264 -preset slow -crf 26 -pix_fmt yuv420p -movflags +faststart -vf scale=1920:-2 hero-1080.mp4
+ffmpeg -i source.mp4 -an -c:v libx264 -preset slow -crf 27 -pix_fmt yuv420p -profile:v main -movflags +faststart -vf scale=1280:-2 hero-720.mp4
+ffmpeg -i hero-1080.mp4 -frames:v 1 -q:v 4 ../images/hero-poster.jpg
+```
 
-## Current Fallback
-The system will automatically fall back to a sample video from Google's test bucket if the local file is not found.
-
-## Adding Your Video
-1. Replace or add `hero.mp4` to this directory
-2. Update the poster image at `/public/images/hero-poster.jpg`
-3. The video will automatically be used in the hero section
+Keep each file well under 15 MB.
