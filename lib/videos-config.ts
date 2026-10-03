@@ -55,92 +55,8 @@ export const videoConfig: VideoConfig = {
     muted: true,
   },
 
-  featured: [
-    {
-      id: '1',
-      title: 'Ocean\'s Legacy',
-      category: 'Documentary',
-      thumbnail: '/api/placeholder/400/300',
-      description: 'An inspiring documentary about marine conservation',
-      videoSource: {
-        type: 'youtube',
-        url: 'https://www.youtube.com/watch?v=VIDEO_ID_1',
-        id: 'VIDEO_ID_1',
-      },
-      tags: ['ocean', 'conservation', 'nature'],
-      featured: true,
-    },
-    {
-      id: '2',
-      title: 'Luxury Redefined',
-      category: 'Commercial',
-      thumbnail: '/api/placeholder/400/300',
-      description: 'High-end commercial for luxury brand',
-      videoSource: {
-        type: 'youtube',
-        url: 'https://www.youtube.com/watch?v=VIDEO_ID_2',
-        id: 'VIDEO_ID_2',
-      },
-      tags: ['luxury', 'commercial', 'brand'],
-      featured: true,
-    },
-    {
-      id: '3',
-      title: 'Midnight Dreams',
-      category: 'Music Video',
-      thumbnail: '/api/placeholder/400/300',
-      description: 'Cinematic music video with stunning visuals',
-      videoSource: {
-        type: 'youtube',
-        url: 'https://www.youtube.com/watch?v=VIDEO_ID_3',
-        id: 'VIDEO_ID_3',
-      },
-      tags: ['music', 'cinematic', 'dreams'],
-      featured: true,
-    },
-    {
-      id: '4',
-      title: 'Urban Stories',
-      category: 'Documentary',
-      thumbnail: '/api/placeholder/400/300',
-      description: 'Street photography meets documentary filmmaking',
-      videoSource: {
-        type: 'youtube',
-        url: 'https://www.youtube.com/watch?v=VIDEO_ID_4',
-        id: 'VIDEO_ID_4',
-      },
-      tags: ['urban', 'street', 'photography'],
-      featured: false,
-    },
-    {
-      id: '5',
-      title: 'Innovation Forward',
-      category: 'Commercial',
-      thumbnail: '/api/placeholder/400/300',
-      description: 'Tech company commercial showcasing innovation',
-      videoSource: {
-        type: 'youtube',
-        url: 'https://www.youtube.com/watch?v=VIDEO_ID_5',
-        id: 'VIDEO_ID_5',
-      },
-      tags: ['tech', 'innovation', 'commercial'],
-      featured: false,
-    },
-    {
-      id: '6',
-      title: 'Rhythm & Light',
-      category: 'Music Video',
-      thumbnail: '/api/placeholder/400/300',
-      description: 'Dynamic music video with synchronized lighting',
-      videoSource: {
-        type: 'youtube',
-        url: 'https://www.youtube.com/watch?v=VIDEO_ID_6',
-        id: 'VIDEO_ID_6',
-      },
-      tags: ['rhythm', 'light', 'dynamic'],
-      featured: false,
-    },
-  ],
+  // Add real projects here (or manage them in Sanity)
+  featured: [],
 
   playlists: {
     documentaries: process.env.NEXT_PUBLIC_YOUTUBE_DOCUMENTARIES_PLAYLIST || 'PLrAHZ3SjOWOCN0NCQ8j5YZm7R88AhEPkH',
@@ -214,7 +130,7 @@ export class VideoManager {
       return `https://img.youtube.com/vi/${videoSource.id}/${qualityMap[quality]}.jpg`;
     }
 
-    return '/api/placeholder/400/300';
+    return '';
   }
 
   static getEmbedUrl(videoSource: VideoSource, options: { autoplay?: boolean; mute?: boolean; controls?: boolean } = {}): string {

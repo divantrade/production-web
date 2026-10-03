@@ -16,7 +16,7 @@ const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET || 'production';
 
 export default defineConfig({
   name: 'luxe-films-studio',
-  title: 'Luxe Films Content Studio',
+  title: 'Luxor Film Content Studio',
   
   projectId,
   dataset,

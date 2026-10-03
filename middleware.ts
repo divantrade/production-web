@@ -12,6 +12,7 @@ export function middleware(request: NextRequest) {
   if (
     pathname.startsWith('/api/') ||
     pathname.startsWith('/studio') ||
+    pathname === '/offline' ||
     pathname.startsWith('/_next') ||
     pathname.match(/\.(js|css|png|jpg|jpeg|gif|ico|svg|webp|woff|woff2|ttf|eot|json|mp4|webm|ogg|mp3|wav|pdf)$/)
   ) {

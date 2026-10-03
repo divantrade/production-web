@@ -32,8 +32,8 @@ export default function LoadingAnimation() {
             className="mb-8"
           >
             <div className="text-4xl md:text-6xl font-bold text-white">
-              <span className="text-gradient">LUXE</span>
-              <span className="text-white ml-2">FILMS</span>
+              <span className="text-gradient">LUXOR</span>
+              <span className="text-white ml-2">FILM</span>
             </div>
           </motion.div>
 

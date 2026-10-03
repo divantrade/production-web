@@ -1,45 +1,21 @@
 'use client';
 
-import { useState, useEffect, useRef } from 'react';
-import { motion, useInView } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { useTranslations } from 'next-intl';
+import { LuFileSearch, LuMic, LuClapperboard, LuTv } from 'react-icons/lu';
 
-const statKeys = ['episodesProduced', 'countriesCovered', 'clientsNetworks', 'yearsExperience'] as const;
-const statValues = [50, 15, 30, 10];
-
-function Counter({ end, suffix = '', shouldStart }: { end: number; suffix?: string; shouldStart: boolean }) {
-  const [count, setCount] = useState(0);
-
-  useEffect(() => {
-    if (!shouldStart) return;
-    let startTime: number;
-    let frame: number;
-
-    const animate = (ts: number) => {
-      if (!startTime) startTime = ts;
-      const progress = (ts - startTime) / 2000;
-      if (progress < 1) {
-        setCount(Math.floor(end * progress));
-        frame = requestAnimationFrame(animate);
-      } else {
-        setCount(end);
-      }
-    };
-
-    frame = requestAnimationFrame(animate);
-    return () => cancelAnimationFrame(frame);
-  }, [end, shouldStart]);
-
-  return <span>{count}{suffix}</span>;
-}
+const items = [
+  { key: 'research', icon: LuFileSearch },
+  { key: 'interviews', icon: LuMic },
+  { key: 'drama', icon: LuClapperboard },
+  { key: 'episodes', icon: LuTv },
+] as const;
 
 export default function StatsSection() {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: '-80px' });
   const tStats = useTranslations('stats');
 
   return (
-    <section ref={ref} className="relative min-h-screen flex flex-col items-center justify-center py-20 lg:py-24 overflow-hidden">
+    <section className="relative min-h-screen flex flex-col items-center justify-center py-20 lg:py-24 overflow-hidden">
       {/* Top separator */}
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
 
@@ -64,9 +40,9 @@ export default function StatsSection() {
           </p>
         </motion.div>
 
-        {/* Stats Grid */}
+        {/* Capabilities */}
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
-          {statKeys.map((key, index) => (
+          {items.map(({ key, icon: Icon }, index) => (
             <motion.div
               key={key}
               initial={{ opacity: 0, y: 24 }}
@@ -75,11 +51,10 @@ export default function StatsSection() {
               transition={{ delay: index * 0.1 }}
               className="group"
             >
-              <div className="flex flex-col items-center justify-center text-center h-40 sm:h-44 rounded-xl border border-white/[0.08] bg-white/[0.02] transition-all duration-300 hover:border-accent/30 hover:bg-accent/[0.04]">
-                <div className="text-4xl md:text-5xl font-bold text-accent mb-2 transition-transform duration-300 group-hover:scale-110">
-                  <Counter end={statValues[index]} suffix="+" shouldStart={isInView} />
-                </div>
-                <p className="text-zinc-400 text-sm font-medium group-hover:text-zinc-300 transition-colors">{tStats(key)}</p>
+              <div className="flex flex-col items-center text-center h-full px-4 py-8 rounded-xl border border-white/[0.08] bg-white/[0.02] transition-all duration-300 hover:border-accent/30 hover:bg-accent/[0.04]">
+                <Icon className="w-9 h-9 text-accent mb-4 transition-transform duration-300 group-hover:scale-110" />
+                <h3 className="text-white font-semibold mb-2">{tStats(`items.${key}.title`)}</h3>
+                <p className="text-zinc-400 text-sm leading-relaxed group-hover:text-zinc-300 transition-colors">{tStats(`items.${key}.text`)}</p>
               </div>
             </motion.div>
           ))}

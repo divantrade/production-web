@@ -21,7 +21,7 @@ async function getProjects() {
 }
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://luxefilms.com';
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://luxorfilm.net';
   const projects = await getProjects();
 
   // Static pages

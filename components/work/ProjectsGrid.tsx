@@ -3,6 +3,7 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import { WorkProject, LoadingState, PaginationState } from '@/types';
 import ProjectCard from './ProjectCard';
+import { useTranslations } from 'next-intl';
 
 interface ProjectsGridProps {
   projects: WorkProject[];
@@ -35,6 +36,7 @@ function LoadingSkeleton() {
 }
 
 function EmptyState() {
+  const t = useTranslations('work');
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -57,9 +59,9 @@ function EmptyState() {
             />
           </svg>
         </div>
-        <h3 className="text-xl font-semibold text-gray-900 mb-2">No projects found</h3>
+        <h3 className="text-xl font-semibold text-gray-900 mb-2">{t('noProjects')}</h3>
         <p className="text-gray-600">
-          Try adjusting your filters or search terms to find what you&apos;re looking for.
+          {t('noProjectsDescription')}
         </p>
       </div>
     </motion.div>
@@ -73,6 +75,7 @@ export default function ProjectsGrid({
   onProjectClick,
   onLoadMore,
 }: ProjectsGridProps) {
+  const t = useTranslations('work');
   if (loading.isLoading) {
     return (
       <section className="py-12 bg-gray-50">
@@ -108,13 +111,13 @@ export default function ProjectsGrid({
                   />
                 </svg>
               </div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-2">Something went wrong</h3>
+              <h3 className="text-xl font-semibold text-gray-900 mb-2">{t('errorTitle')}</h3>
               <p className="text-gray-600 mb-4">{loading.error}</p>
               <button
                 onClick={() => window.location.reload()}
                 className="px-4 py-2 bg-accent text-black rounded-lg hover:bg-accent/80 transition-colors"
               >
-                Reload Page
+                {t('reloadPage')}
               </button>
             </div>
           </motion.div>
@@ -177,11 +180,11 @@ export default function ProjectsGrid({
                 {loading.isLoadingMore ? (
                   <>
                     <div className="w-4 h-4 border-2 border-current border-t-transparent rounded-full animate-spin" />
-                    <span>Loading...</span>
+                    <span>{t('loading')}</span>
                   </>
                 ) : (
                   <>
-                    <span>Load More Projects</span>
+                    <span>{t('loadMore')}</span>
                     <motion.div
                       animate={{ y: [0, 4, 0] }}
                       transition={{ duration: 1.5, repeat: Infinity }}
@@ -213,12 +216,7 @@ export default function ProjectsGrid({
           animate={{ opacity: 1 }}
           className="text-center mt-8 text-sm text-gray-600"
         >
-          Showing {projects.length} of {pagination.totalItems} projects
-          {pagination.totalPages > 1 && (
-            <span className="ml-2">
-              (Page {pagination.currentPage} of {pagination.totalPages})
-            </span>
-          )}
+          {t('showingOf', { shown: projects.length, total: pagination.totalItems })}
         </motion.div>
 
         {/* End Message */}
@@ -229,10 +227,7 @@ export default function ProjectsGrid({
             className="text-center mt-8 pt-8 border-t border-gray-200"
           >
             <p className="text-gray-600">
-              You&apos;ve reached the end of our portfolio. 
-              <span className="block mt-1 text-sm">
-                Want to see more? <a href="#contact" className="text-accent hover:underline">Get in touch</a> to discuss your next project.
-              </span>
+              {t('endMessage')}
             </p>
           </motion.div>
         )}

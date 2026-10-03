@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { HiSearch, HiFilter, HiChevronDown, HiX } from 'react-icons/hi';
 import { FilterOptions } from '@/types';
 import { cn } from '@/lib/utils';
+import { useTranslations } from 'next-intl';
 
 interface FilterBarProps {
   filters: FilterOptions;
@@ -23,6 +24,7 @@ export default function FilterBar({
   availableIndustries,
   totalResults,
 }: FilterBarProps) {
+  const t = useTranslations('work.filters');
   const [isSticky, setIsSticky] = useState(false);
   const [showMobileFilters, setShowMobileFilters] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
@@ -106,11 +108,12 @@ export default function FilterBar({
   }, []);
 
   const categories: FilterOptions['category'][] = ['All', 'Documentary', 'Commercial', 'Music Video'];
+  const categoryLabel = (category: FilterOptions['category']) => t(`categories.${category}`);
   const sortOptions: { value: FilterOptions['sortBy']; label: string }[] = [
-    { value: 'latest', label: 'Latest' },
-    { value: 'mostViewed', label: 'Most Viewed' },
-    { value: 'featured', label: 'Featured' },
-    { value: 'alphabetical', label: 'A-Z' },
+    { value: 'latest', label: t('sort.latest') },
+    { value: 'mostViewed', label: t('sort.mostViewed') },
+    { value: 'featured', label: t('sort.featured') },
+    { value: 'alphabetical', label: t('sort.alphabetical') },
   ];
 
   const hasActiveFilters = filters.category !== 'All' || 
@@ -135,7 +138,7 @@ export default function FilterBar({
               <HiSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={20} />
               <input
                 type="text"
-                placeholder="Search projects..."
+                placeholder={t('searchPlaceholder')}
                 value={searchValue}
                 onChange={handleSearchInputChange}
                 className="w-full pl-10 pr-10 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-accent focus:border-transparent"
@@ -163,7 +166,7 @@ export default function FilterBar({
                       : 'bg-white text-gray-700 border-gray-300 hover:border-gray-400'
                   )}
                 >
-                  <span>{filters.category}</span>
+                  <span>{categoryLabel(filters.category)}</span>
                   <HiChevronDown size={16} />
                 </button>
                 
@@ -184,7 +187,7 @@ export default function FilterBar({
                             filters.category === category && 'bg-accent/10 text-accent'
                           )}
                         >
-                          {category}
+                          {categoryLabel(category)}
                         </button>
                       ))}
                     </motion.div>
@@ -203,7 +206,7 @@ export default function FilterBar({
                       : 'bg-white text-gray-700 border-gray-300 hover:border-gray-400'
                   )}
                 >
-                  <span>{filters.year === 'All' ? 'Year' : filters.year}</span>
+                  <span>{filters.year === 'All' ? t('year') : filters.year}</span>
                   <HiChevronDown size={16} />
                 </button>
                 
@@ -222,7 +225,7 @@ export default function FilterBar({
                           filters.year === 'All' && 'bg-accent/10 text-accent'
                         )}
                       >
-                        All Years
+                        {t('allYears')}
                       </button>
                       {availableYears.map((year) => (
                         <button
@@ -247,7 +250,7 @@ export default function FilterBar({
                   onClick={() => setActiveDropdown(activeDropdown === 'sort' ? null : 'sort')}
                   className="flex items-center space-x-2 px-4 py-2 rounded-lg border bg-white text-gray-700 border-gray-300 hover:border-gray-400 transition-colors"
                 >
-                  <span>Sort: {sortOptions.find(opt => opt.value === filters.sortBy)?.label}</span>
+                  <span>{t('sortLabel')}: {sortOptions.find(opt => opt.value === filters.sortBy)?.label}</span>
                   <HiChevronDown size={16} />
                 </button>
                 
@@ -282,14 +285,14 @@ export default function FilterBar({
                   onClick={clearAllFilters}
                   className="text-sm text-gray-600 hover:text-gray-800 underline"
                 >
-                  Clear All
+                  {t('clearAll')}
                 </button>
               )}
             </div>
 
             {/* Results Count */}
             <div className="text-sm text-gray-600">
-              {totalResults} {totalResults === 1 ? 'project' : 'projects'}
+              {t('results', { count: totalResults })}
             </div>
           </div>
 
@@ -301,7 +304,7 @@ export default function FilterBar({
                 <HiSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={18} />
                 <input
                   type="text"
-                  placeholder="Search..."
+                  placeholder={t('searchShort')}
                   value={searchValue}
                   onChange={handleSearchInputChange}
                   className="w-full pl-10 pr-8 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-accent focus:border-transparent text-sm"
@@ -327,13 +330,13 @@ export default function FilterBar({
                 )}
               >
                 <HiFilter size={16} />
-                <span>Filter</span>
+                <span>{t('filter')}</span>
               </button>
             </div>
 
             {/* Results */}
             <div className="mt-2 text-sm text-gray-600">
-              {totalResults} {totalResults === 1 ? 'project' : 'projects'}
+              {t('results', { count: totalResults })}
             </div>
 
             {/* Mobile Filter Panel */}
@@ -348,7 +351,7 @@ export default function FilterBar({
                   <div className="grid grid-cols-2 gap-4">
                     {/* Category */}
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">Category</label>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">{t('category')}</label>
                       <select
                         value={filters.category}
                         onChange={(e) => handleCategoryChange(e.target.value as FilterOptions['category'])}
@@ -356,7 +359,7 @@ export default function FilterBar({
                       >
                         {categories.map((category) => (
                           <option key={category} value={category}>
-                            {category}
+                            {categoryLabel(category)}
                           </option>
                         ))}
                       </select>
@@ -364,13 +367,13 @@ export default function FilterBar({
 
                     {/* Year */}
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">Year</label>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">{t('year')}</label>
                       <select
                         value={filters.year}
                         onChange={(e) => handleYearChange(e.target.value === 'All' ? 'All' : parseInt(e.target.value))}
                         className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-accent focus:border-transparent text-sm"
                       >
-                        <option value="All">All Years</option>
+                        <option value="All">{t('allYears')}</option>
                         {availableYears.map((year) => (
                           <option key={year} value={year}>
                             {year}
@@ -381,7 +384,7 @@ export default function FilterBar({
 
                     {/* Sort */}
                     <div className="col-span-2">
-                      <label className="block text-sm font-medium text-gray-700 mb-2">Sort By</label>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">{t('sortBy')}</label>
                       <select
                         value={filters.sortBy}
                         onChange={(e) => handleSortChange(e.target.value as FilterOptions['sortBy'])}
@@ -401,7 +404,7 @@ export default function FilterBar({
                       onClick={clearAllFilters}
                       className="mt-4 text-sm text-gray-600 hover:text-gray-800 underline"
                     >
-                      Clear All Filters
+                      {t('clearAllFilters')}
                     </button>
                   )}
                 </motion.div>

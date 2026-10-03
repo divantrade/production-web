@@ -20,7 +20,11 @@
     }
   },
   "hero": {
-    "headlines": ["Crafting Visual Stories", "Creating Cinematic Magic", "Bringing Dreams to Life"],
+    "headlines": [
+      "Crafting Visual Stories",
+      "Creating Cinematic Magic",
+      "Bringing Dreams to Life"
+    ],
     "subtitle": "Premium Documentary & Commercial Production",
     "viewWork": "VIEW OUR WORK",
     "getInTouch": "GET IN TOUCH",
@@ -42,13 +46,27 @@
     }
   },
   "stats": {
-    "label": "Our Track Record",
+    "label": "What We Deliver",
     "heading": "From Trusted Partner to Full Production House",
-    "description": "Over the years, we have built our expertise through collaborating with leading production companies and networks — delivering research, interviews, drama, and full episodes across the globe.",
-    "episodesProduced": "Episodes Produced",
-    "countriesCovered": "Countries Covered",
-    "clientsNetworks": "Clients & Networks",
-    "yearsExperience": "Years of Experience"
+    "description": "We have built our expertise by working alongside production companies and TV networks, delivering research, interviews, drama, and full episodes for documentary projects.",
+    "items": {
+      "research": {
+        "title": "Research & Script",
+        "text": "In-depth research and script development for documentary projects."
+      },
+      "interviews": {
+        "title": "Interviews",
+        "text": "Planning, filming, and delivering interviews in any country."
+      },
+      "drama": {
+        "title": "Drama Scenes",
+        "text": "Dramatic reconstruction scenes that bring documentaries to life."
+      },
+      "episodes": {
+        "title": "Full Episodes",
+        "text": "Complete episodes delivered ready for broadcast."
+      }
+    }
   },
   "howWeWork": {
     "label": "How We Work",
@@ -94,9 +112,7 @@
     "aboutUs": "About Us",
     "aboutDescription": "We specialize in documentary filmmaking, from research and script development to full broadcast-ready delivery.",
     "learnMore": "Learn more",
-    "copyright": "© {year} Luxe Films. All rights reserved.",
-    "privacyPolicy": "Privacy Policy",
-    "termsOfService": "Terms of Service",
+    "copyright": "© {year} Luxor Film. All rights reserved.",
     "services": {
       "researchScript": "Research & Script Development",
       "interviewProduction": "Interview Production",
@@ -107,72 +123,53 @@
     }
   },
   "about": {
-    "breadcrumbHome": "Home",
-    "breadcrumbAbout": "About Us",
-    "heroHeading": "About Luxe Films",
-    "heroTagline": "Crafting Visual Stories That Inspire",
-    "heroDescription": "We are a premium documentary and commercial production company dedicated to creating compelling visual narratives that captivate audiences and drive meaningful engagement.",
-    "watchStory": "Watch Our Story",
-    "storyHeading": "Our Story",
-    "journeyHeading": "Our Journey",
-    "timeline": {
-      "beginning": { "title": "The Beginning", "description": "Luxe Films was founded with a vision to create exceptional visual content." },
-      "firstProject": { "title": "First Major Project", "description": "Completed our first award-winning documentary series." },
-      "expansion": { "title": "Team Expansion", "description": "Grew our team to include specialized departments for different production needs." },
-      "recognition": { "title": "International Recognition", "description": "Received international acclaim and expanded to serve global clients." },
-      "present": { "title": "Present Day", "description": "Leading the industry with innovative productions and cutting-edge technology." }
-    },
-    "missionVision": {
-      "sectionHeading": "Our Foundation",
-      "sectionDescription": "The core principles that guide everything we do",
-      "mission": "Our Mission",
-      "vision": "Our Vision",
-      "approach": "Our Approach",
-      "approachText": "We believe in collaborative storytelling, combining technical expertise with creative vision to deliver content that resonates with audiences and drives meaningful engagement.",
-      "passion": "Our Passion",
-      "passionText": "Every project is an opportunity to push creative boundaries and explore new ways of visual communication, ensuring each story is told with authenticity and impact.",
-      "quote": "Great stories have the power to change perspectives, inspire action, and create lasting connections between people and ideas.",
-      "quoteAuthor": "Luxe Films Team"
-    },
-    "team": {
-      "heading": "Meet Our Team",
-      "description": "Talented professionals passionate about creating exceptional visual content",
-      "ctaHeading": "Join Our Creative Team",
-      "ctaDescription": "We're always looking for talented individuals who share our passion for visual storytelling.",
-      "viewPositions": "View Open Positions"
-    },
-    "awards": {
-      "heading": "Awards & Recognition",
-      "description": "Our commitment to excellence has been recognized by industry leaders and prestigious organizations",
-      "awardsWon": "Awards Won",
-      "filmFestivals": "Film Festivals",
-      "industryRecognition": "Industry Recognition",
-      "yearsRunning": "Years Running"
-    },
-    "values": {
-      "heading": "Our Values",
-      "description": "The principles that drive our creative process and client relationships",
-      "excellenceHeading": "Excellence Through Values",
-      "excellenceDescription": "These values aren't just words on our website – they're the foundation of every project we undertake and every relationship we build."
-    }
+    "heroHeading": "About Luxor Film",
+    "heroTagline": "Documentary Production, From Research to Broadcast",
+    "heroDescription": "Luxor Film is a documentary production company. We support production companies and networks at any stage of a documentary, or take on the whole production ourselves.",
+    "storyHeading": "Who We Are",
+    "storyParagraphs": [
+      "We specialize in documentary filmmaking: research and script development, interview production, drama and docudrama scenes, and full episode delivery.",
+      "Some partners bring us in for a single phase, such as research for an existing project or interviews in another country. Others hand us the whole production, from the first idea to a broadcast-ready episode. Either way, we work with the same care and attention to detail."
+    ]
   },
   "work": {
     "heroHeading": "Our Portfolio",
-    "heroSubtitle": "Crafting Visual Excellence Since 2014",
-    "heroDescription": "Every project we undertake is a testament to our commitment to storytelling excellence. From intimate documentaries to grand commercial productions, we bring passion, creativity, and technical mastery to every frame.",
-    "projects": "Projects",
-    "awards": "Awards",
-    "clients": "Clients",
+    "heroSubtitle": "Documentary Production",
+    "heroDescription": "A selection of the documentary work we have produced: research, interviews, drama scenes, and full episodes.",
     "exploreWork": "Explore Work",
-    "searchPlaceholder": "Search projects...",
-    "noProjects": "No projects found",
-    "noProjectsDescription": "Try adjusting your filters or search terms to find what you're looking for.",
+    "noProjects": "Projects coming soon",
+    "noProjectsDescription": "We're preparing our portfolio. Check back soon to see our work.",
     "errorTitle": "Something went wrong",
     "reloadPage": "Reload Page",
     "loadMore": "Load More Projects",
     "loading": "Loading...",
     "showingOf": "Showing {shown} of {total} projects",
-    "endMessage": "You've reached the end of our portfolio. Want to see more? Get in touch to discuss your next project.",
-    "getInTouch": "Get in touch"
+    "endMessage": "You've reached the end of our portfolio.",
+    "getInTouch": "Get in touch",
+    "filters": {
+      "searchPlaceholder": "Search projects...",
+      "searchShort": "Search...",
+      "category": "Category",
+      "year": "Year",
+      "allYears": "All Years",
+      "sortLabel": "Sort",
+      "sortBy": "Sort By",
+      "filter": "Filter",
+      "clearAll": "Clear All",
+      "clearAllFilters": "Clear All Filters",
+      "results": "{count, plural, one {# project} other {# projects}}",
+      "categories": {
+        "All": "All",
+        "Documentary": "Documentary",
+        "Commercial": "Commercial",
+        "Music Video": "Music Video"
+      },
+      "sort": {
+        "latest": "Latest",
+        "mostViewed": "Most Viewed",
+        "featured": "Featured",
+        "alphabetical": "A-Z"
+      }
+    }
   }
 }
