@@ -1,7 +1,7 @@
 // Service Worker for Luxor Film PWA
-const CACHE_NAME = 'luxor-film-v2';
-const STATIC_CACHE_NAME = 'luxor-film-static-v2';
-const DYNAMIC_CACHE_NAME = 'luxor-film-dynamic-v2';
+const CACHE_NAME = 'luxor-film-v3';
+const STATIC_CACHE_NAME = 'luxor-film-static-v3';
+const DYNAMIC_CACHE_NAME = 'luxor-film-dynamic-v3';
 
 // Static assets to cache immediately. Every entry must return 200 without a
 // redirect, otherwise cache.addAll() rejects and nothing gets cached.
@@ -106,8 +106,9 @@ self.addEventListener('fetch', (event) => {
     // Videos - network only (too large to cache effectively)
     event.respondWith(fetch(request));
   } else {
-    // HTML pages - stale while revalidate
-    event.respondWith(staleWhileRevalidate(request));
+    // HTML pages and RSC payloads - network first so visitors always get the
+    // latest deploy; the cached copy is only used when offline
+    event.respondWith(networkFirst(request));
   }
 });
 
@@ -145,47 +146,11 @@ async function networkFirst(request) {
     if (cachedResponse) {
       return cachedResponse;
     }
+    if (request.mode === 'navigate') {
+      const offlinePage = await caches.match('/offline');
+      if (offlinePage) return offlinePage;
+    }
     return new Response('Offline', { status: 503 });
-  }
-}
-
-async function staleWhileRevalidate(request) {
-  try {
-    const cachedResponse = await caches.match(request);
-    const networkResponsePromise = fetch(request)
-      .then((response) => {
-        if (response.status === 200) {
-          const cache = caches.open(DYNAMIC_CACHE_NAME);
-          cache.then((c) => c.put(request, response.clone()));
-        }
-        return response;
-      })
-      .catch(() => null);
-    
-    // Return cached version immediately, update in background
-    if (cachedResponse) {
-      networkResponsePromise; // Update cache in background
-      return cachedResponse;
-    }
-    
-    // If no cache, wait for network
-    const networkResponse = await networkResponsePromise;
-    if (networkResponse) {
-      return networkResponse;
-    }
-    
-    // Fallback to offline page for navigation requests
-    if (request.mode === 'navigate') {
-      return caches.match('/offline');
-    }
-    
-    return new Response('Not found', { status: 404 });
-  } catch (error) {
-    console.error('[SW] Stale while revalidate failed:', error);
-    if (request.mode === 'navigate') {
-      return caches.match('/offline');
-    }
-    return new Response('Error', { status: 500 });
   }
 }
 
